@@ -1,0 +1,40 @@
+import AffiliateLink from "@/components/AffiliateLink";
+import Tweet from "@/components/Tweet";
+import { id } from "date-fns/locale";
+import { title } from "process";
+
+---
+
+title: "初めてのブログ投稿"
+date: "2025-03-17"
+tags: ["Next.js", "MDX", "ブログ"]
+
+---
+
+# 初めてのブログ投稿へようこそ！
+
+これは MDX で書かれた最初の投稿です。
+
+## 商品紹介
+
+<AffiliateLink
+  title="おすすめの商品"
+  imageUrl="/images/product.jpg"
+  amazonUrl="https://amazon.co.jp/product/12345"
+  rakutenUrl="https://rakuten.co.jp/product/12345"
+/>
+
+## Twitter の埋め込み
+
+<Tweet id="1234567890" />
+
+## 画像の表示
+
+![美しい風景](/images/landscape.jpg)
+
+## コードの表示
+
+const greeting = "Hello, World!";
+console.log(greeting);
+
+今日の日付: <Date dateString="2025-03-17" />

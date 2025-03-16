@@ -9,11 +9,42 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        primary: "#3490dc",
+        secondary: "#ffed4a",
+        dark: "#2d3748",
+      },
+      typography: {
+        DEFAULT: {
+          css: {
+            color: "#333",
+            a: {
+              color: "#3490dc",
+              "&:hover": {
+                color: "#2779bd",
+              },
+            },
+            h2: {
+              fontWeight: "700",
+              borderBottom: "1px solid #e2e8f0",
+              paddingBottom: "0.5rem",
+            },
+            h3: {
+              fontWeight: "600",
+            },
+            blockquote: {
+              borderLeftColor: "#3490dc",
+            },
+            "code::before": {
+              content: '""',
+            },
+            "code::after": {
+              content: '""',
+            },
+          },
+        },
       },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/typography")],
 };
 export default config;
