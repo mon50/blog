@@ -5,7 +5,10 @@ import Tweet from "@/components/Tweet";
 import Date from "@/components/Date";
 
 const MDXComponents = {
-  Image: (props: ImageProps) => <Image {...props} />,
+  Image: (props: ImageProps) => {
+    const { alt = '', ...rest } = props;
+    return <Image alt={alt} {...rest} />;
+  },
   AffiliateLink: AffiliateLink,
   Tweet: Tweet,
   Date: Date,
