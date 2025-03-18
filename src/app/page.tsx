@@ -69,7 +69,7 @@ export default async function Home() {
                     {featuredPost.frontMatter.title}
                   </h3>
                   <time className="text-sm text-[#6f4e37] mb-4 block">
-                    {format(parseISO(featuredPost.frontMatter.date), "yyyy年MM月dd日", { locale: ja })}
+                  {featuredPost.frontMatter.date && format(parseISO(featuredPost.frontMatter.date), "yyyy年MM月dd日", { locale: ja })}
                   </time>
                   <p className="text-[#3c3732] mb-4">
                     {featuredPost.frontMatter.excerpt || "この記事の内容をチェックしてください..."}
