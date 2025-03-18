@@ -3,21 +3,43 @@
 @tailwind utilities;
 
 :root {
+  /* シックなカフェのような雰囲気のカラースキーム */
   --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --foreground: #2d2926; /* ダークブラウン */
+  --primary: #6f4e37; /* コーヒーブラウン */
+  --primary-dark: #5a3e2c;
+  --secondary: #d2c6b2; /* クリームベージュ */
+  --accent: #bd8c7d; /* ソフトモカ */
+  --neutral-50: #f9f7f5;
+  --neutral-100: #f1eeea;
+  --neutral-200: #e2ddd5;
+  --neutral-300: #d2c6b2;
+  --neutral-800: #3c3732;
+  --neutral-900: #2d2926;
 }
 
 body {
   color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--neutral-50);
+  font-family: var(--font-geist-sans), sans-serif;
+}
+
+/* カスタムスタイル */
+.btn-primary {
+  @apply bg-[#6f4e37] hover:bg-[#5a3e2c] text-white font-medium px-4 py-2 rounded-md transition-colors;
+}
+
+.btn-secondary {
+  @apply bg-[#d2c6b2] hover:bg-[#c2b5a0] text-[#2d2926] font-medium px-4 py-2 rounded-md transition-colors;
+}
+
+.card {
+  @apply bg-white border border-[#e2ddd5] rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300;
+}
+
+/* 美術館のようなタイポグラフィ */
+h1, h2, h3, h4, h5, h6 {
+  @apply font-medium tracking-tight;
 }
 
 @layer utilities {
