@@ -6,8 +6,8 @@ const SearchBar = dynamic(() => import("./SearchBar"), { ssr: false });
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-gray-50">
-      <header className="bg-white shadow-sm sticky top-0 z-50">
+    <div className="min-h-screen bg-[#f9f7f5]">
+      <header className="bg-white shadow-sm sticky top-0 z-50 border-b border-[#e2ddd5]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <Link href="/" className="flex items-center space-x-2">
@@ -17,19 +17,16 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             {/* デスクトップメニュー */}
             <div className="hidden md:flex items-center space-x-6">
               <Link href="/" className="text-gray-600 hover:text-gray-900 font-medium">
-                ホーム
+                Home
               </Link>
-              <Link href="/category/smartphone" className="text-gray-600 hover:text-gray-900 font-medium">
-                スマートフォン
+              <Link href="/contact" className="text-gray-600 hover:text-gray-900 font-medium">
+                Contact
               </Link>
-              <Link href="/category/audio" className="text-gray-600 hover:text-gray-900 font-medium">
-                オーディオ
+              <Link href="/profile" className="text-gray-600 hover:text-gray-900 font-medium">
+                Profile
               </Link>
-              <Link href="/category/pc" className="text-gray-600 hover:text-gray-900 font-medium">
-                PC・周辺機器
-              </Link>
-              <Link href="/about" className="text-gray-600 hover:text-gray-900 font-medium">
-                当サイトについて
+              <Link href="/privacy" className="text-gray-600 hover:text-gray-900 font-medium">
+                Privacy Policy
               </Link>
               
               {/* 検索ボタン */}
@@ -69,19 +66,16 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <div className="hidden md:hidden" id="mobile-menu">
           <div className="px-4 pt-2 pb-3 space-y-1 border-t">
             <Link href="/" className="block py-2 text-base font-medium text-gray-600 hover:text-gray-900">
-              ホーム
+              Home
             </Link>
-            <Link href="/category/smartphone" className="block py-2 text-base font-medium text-gray-600 hover:text-gray-900">
-              スマートフォン
+            <Link href="/contact" className="block py-2 text-base font-medium text-gray-600 hover:text-gray-900">
+              Contact
             </Link>
-            <Link href="/category/audio" className="block py-2 text-base font-medium text-gray-600 hover:text-gray-900">
-              オーディオ
+            <Link href="/profile" className="block py-2 text-base font-medium text-gray-600 hover:text-gray-900">
+              Profile
             </Link>
-            <Link href="/category/pc" className="block py-2 text-base font-medium text-gray-600 hover:text-gray-900">
-              PC・周辺機器
-            </Link>
-            <Link href="/about" className="block py-2 text-base font-medium text-gray-600 hover:text-gray-900">
-              当サイトについて
+            <Link href="/privacy" className="block py-2 text-base font-medium text-gray-600 hover:text-gray-900">
+              Privacy Policy
             </Link>
             <div className="pt-2">
               <SearchBar />
@@ -94,7 +88,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         {children}
       </main>
       
-      <footer className="bg-gray-800 text-white">
+      <footer className="bg-[#2d2926] text-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
@@ -117,23 +111,23 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               <h3 className="text-lg font-semibold mb-4">カテゴリー</h3>
               <ul className="space-y-2">
                 <li>
-                  <Link href="/category/smartphone" className="text-gray-300 hover:text-white">
-                    スマートフォン
+                  <Link href="/tag/gadget" className="text-gray-300 hover:text-white">
+                    ガジェット
                   </Link>
                 </li>
                 <li>
-                  <Link href="/category/audio" className="text-gray-300 hover:text-white">
-                    オーディオ
+                  <Link href="/tag/review" className="text-gray-300 hover:text-white">
+                    レビュー
                   </Link>
                 </li>
                 <li>
-                  <Link href="/category/pc" className="text-gray-300 hover:text-white">
-                    PC・周辺機器
+                  <Link href="/tag/howto" className="text-gray-300 hover:text-white">
+                    使い方ガイド
                   </Link>
                 </li>
                 <li>
-                  <Link href="/category/smartwatch" className="text-gray-300 hover:text-white">
-                    スマートウォッチ
+                  <Link href="/tag/news" className="text-gray-300 hover:text-white">
+                    ニュース
                   </Link>
                 </li>
               </ul>
@@ -142,18 +136,18 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               <h3 className="text-lg font-semibold mb-4">サイト情報</h3>
               <ul className="space-y-2">
                 <li>
-                  <Link href="/about" className="text-gray-300 hover:text-white">
-                    当サイトについて
+                  <Link href="/profile" className="text-gray-300 hover:text-white">
+                    Profile
                   </Link>
                 </li>
                 <li>
                   <Link href="/privacy" className="text-gray-300 hover:text-white">
-                    プライバシーポリシー
+                    Privacy Policy
                   </Link>
                 </li>
                 <li>
                   <Link href="/contact" className="text-gray-300 hover:text-white">
-                    お問い合わせ
+                    Contact
                   </Link>
                 </li>
               </ul>

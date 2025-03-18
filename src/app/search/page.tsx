@@ -1,6 +1,7 @@
 import { searchPosts } from "@/lib/mdx";
 import Layout from "@/components/Layout";
 import Link from "next/link";
+import TagLink from "@/components/TagLink";
 import { format, parseISO } from "date-fns";
 import { ja } from "date-fns/locale";
 
@@ -86,14 +87,12 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
                       {post.frontMatter.tags && (
                         <div className="flex flex-wrap">
                           {post.frontMatter.tags.map((tag: string) => (
-                            <Link
-                              key={tag}
-                              href={`/tag/${tag}`}
-                              className="mr-2 mb-2 px-3 py-1 bg-gray-100 text-gray-800 text-xs rounded-full hover:bg-gray-200 transition-colors"
-                              onClick={(e) => e.stopPropagation()}
-                            >
-                              {tag}
-                            </Link>
+                            <span key={tag}>
+                              <TagLink
+                                tag={tag}
+                                className="mr-2 mb-2 px-3 py-1 bg-gray-100 text-gray-800 text-xs rounded-full hover:bg-gray-200 transition-colors"
+                              />
+                            </span>
                           ))}
                         </div>
                       )}

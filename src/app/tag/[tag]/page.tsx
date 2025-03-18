@@ -1,92 +1,93 @@
-import Link from "next/link";
-import Layout from "@/components/Layout";
 import { getPostsByTag } from "@/lib/mdx";
+import Layout from "@/components/Layout";
+import Link from "next/link";
+import TagLink from "@/components/TagLink";
 import { format, parseISO } from "date-fns";
 import { ja } from "date-fns/locale";
-import { notFound } from "next/navigation";
 
-export default async function TagPage({
-  params,
-}: {
-  params: { tag: string };
-}) {
+export default async function TagPage({ params }: { params: { tag: string } }) {
   const { tag } = params;
-  const decodedTag = decodeURIComponent(tag);
-  const posts = await getPostsByTag(decodedTag);
-
-  if (posts.length === 0) {
-    notFound();
-  }
+  const posts = await getPostsByTag(tag);
 
   return (
     <Layout>
-      <div className="space-y-10">
-        <div className="text-center max-w-3xl mx-auto">
-          <div className="inline-block bg-blue-50 text-blue-700 px-4 py-2 rounded-full text-sm font-medium mb-4">
-            タグ
-          </div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">
-            「{decodedTag}」の記事
-          </h1>
-          <p className="text-gray-600">
-            「{decodedTag}」に関連する記事が{posts.length}件見つかりました。
-          </p>
-        </div>
+      <div className="max-w-4xl mx-auto">
+        <h1 className="text-2xl md:text-3xl font-bold text-[#2d2926] mb-6 border-b pb-4 border-[#e2ddd5]">
+          タグ: {tag}
+        </h1>
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {posts.map((post) => (
-            <Link
-              href={`/blog/${post.slug}`}
-              key={post.slug}
-              className="block group"
+        {posts.length === 0 ? (
+          <div className="bg-[#f9f7f5] rounded-lg p-8 text-center">
+            <svg
+              className="mx-auto h-12 w-12 text-[#d2c6b2] mb-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
             >
-              <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
-                <div className="relative h-48 bg-gray-300 flex items-center justify-center">
-                  <span className="text-gray-600">記事のサムネイル</span>
-                </div>
-                <div className="p-6">
-                  <div className="flex flex-wrap mb-2">
-                    {post.frontMatter.tags &&
-                      post.frontMatter.tags.slice(0, 2).map((t: string) => (
-                        <span
-                          key={t}
-                          className={`mr-2 mb-2 px-2 py-1 text-xs rounded-md ${
-                            t === decodedTag
-                              ? "bg-blue-100 text-blue-800"
-                              : "bg-gray-100 text-gray-800"
-                          }`}
-                        >
-                          {t}
-                        </span>
-                      ))}
-                  </div>
-                  <h3 className="text-xl font-semibold text-gray-900 group-hover:text-blue-600 transition-colors duration-300 mb-2">
-                    {post.frontMatter.title}
-                  </h3>
-                  <time className="text-sm text-gray-600 mb-3 block">
-                    {format(parseISO(post.frontMatter.date), "yyyy年MM月dd日", {
-                      locale: ja,
-                    })}
-                  </time>
-                  {post.frontMatter.excerpt && (
-                    <p className="text-gray-600 text-sm line-clamp-2">
-                      {post.frontMatter.excerpt}
-                    </p>
-                  )}
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={1.5}
+                d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            <h2 className="text-lg font-medium text-[#2d2926] mb-2">
+              記事が見つかりません
+            </h2>
+            <p className="text-[#6f4e37] mb-4">
+              このタグに関連する記事はまだありません。
+            </p>
+          </div>
+        ) : (
+          <>
+            <p className="text-[#6f4e37] mb-8">
+              {posts.length}件の記事が見つかりました
+            </p>
 
-        <div className="text-center mt-8">
-          <Link
-            href="/"
-            className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700"
-          >
-            ホームに戻る
-          </Link>
-        </div>
+            <div className="space-y-8">
+              {posts.map((post) => (
+                <article
+                  key={post.slug}
+                  className="card"
+                >
+                  <Link href={`/blog/${post.slug}`} className="block group">
+                    <div className="p-6">
+                      <h2 className="text-xl font-bold text-[#2d2926] group-hover:text-[#6f4e37] transition-colors mb-2">
+                        {post.frontMatter.title}
+                      </h2>
+                      <div className="flex items-center text-sm text-[#6f4e37] mb-3">
+                        <time dateTime={post.frontMatter.date}>
+                          {format(parseISO(post.frontMatter.date), "yyyy年MM月dd日", { locale: ja })}
+                        </time>
+                        <span className="mx-2">•</span>
+                        <span>
+                          {post.frontMatter.viewCount || 0}回表示
+                        </span>
+                      </div>
+                      {post.frontMatter.excerpt && (
+                        <p className="text-[#3c3732] mb-4">
+                          {post.frontMatter.excerpt}
+                        </p>
+                      )}
+                      {post.frontMatter.tags && (
+                        <div className="flex flex-wrap">
+                          {post.frontMatter.tags.map((tagName: string) => (
+                            <span key={tagName}>
+                              <TagLink
+                                tag={tagName}
+                                className="mr-2 mb-2 px-3 py-1 bg-[#f1eeea] text-[#6f4e37] text-xs rounded-md hover:bg-[#e2ddd5] transition-colors"
+                              />
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </Link>
+                </article>
+              ))}
+            </div>
+          </>
+        )}
       </div>
     </Layout>
   );
