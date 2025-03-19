@@ -52,7 +52,7 @@ const Note: React.FC<NoteProps> = ({ children, type = "info" }) => {
   const { containerClass, iconClass, icon, title } = styles[type];
 
   return (
-    <div className={`border-l-4 p-4 my-6 rounded-r-md ${containerClass}`}>
+    <div className={`border-l-4 p-4 my-6 rounded-r-md ${containerClass} animate-slideInRight`}>
       <div className="flex items-center mb-2">
         <span className={`mr-2 ${iconClass}`}>{icon}</span>
         <span className="font-bold">{title}</span>
@@ -62,19 +62,6 @@ const Note: React.FC<NoteProps> = ({ children, type = "info" }) => {
   );
 };
 
-interface TableProps {
-  children: React.ReactNode;
-}
-
-const Table: React.FC<TableProps> = ({ children }) => {
-  return (
-    <div className="overflow-x-auto my-6">
-      <table className="min-w-full divide-y divide-gray-200">
-        {children}
-      </table>
-    </div>
-  );
-};
 
 // MDXコンポーネント
 const MDXComponents = {

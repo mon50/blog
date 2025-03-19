@@ -16,30 +16,37 @@ export default async function Home() {
   const otherPosts = posts.slice(1);
 
   return (
-    <Layout>
+    <Layout heroMode={true}>
       <div className="space-y-12">
-        {/* ヒーローセクション */}
-        <section className="relative bg-[#2d2926] text-white rounded-xl overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-[#2d2926] to-transparent z-10"></div>
-          <div className="relative z-20 p-8 md:p-12 max-w-3xl">
-            <h1 className="text-3xl md:text-4xl font-bold mb-4">
-              シックな雰囲気の中で楽しむガジェット情報
+        {/* ヒーローセクション - 改良版 */}
+        <section className="hero-section">
+          <div className="hero-content">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white leading-tight animate-slideInLeft">
+              シックな雰囲気の中で<br />楽しむガジェット情報
             </h1>
-            <p className="text-lg text-gray-200 mb-6">
+            <p className="text-xl text-gray-100 mb-8 max-w-lg animate-slideInLeft delay-200">
               最新のガジェット情報やレビューを、カフェのような落ち着いた雰囲気でお届けします。
             </p>
-            <Link 
-              href="/tag/featured" 
-              className="btn-secondary inline-block"
-            >
-              注目の記事をチェック
-            </Link>
+            <div className="flex flex-col sm:flex-row gap-4 animate-slideInLeft delay-300">
+              <Link 
+                href="/tag/featured" 
+                className="btn-secondary inline-block text-center"
+              >
+                注目の記事をチェック
+              </Link>
+              <Link 
+                href="/blog" 
+                className="inline-block text-center bg-transparent border-2 border-white text-white px-4 py-2 rounded-full hover:bg-white hover:text-[#2d2926] transition-colors"
+              >
+                すべての記事を見る
+              </Link>
+            </div>
           </div>
         </section>
 
         {/* フィーチャード記事 */}
         {featuredPost && (
-          <section>
+          <section className="animate-fadeIn">
             <h2 className="text-2xl font-bold text-[#2d2926] mb-6 flex items-center">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2 text-[#bd8c7d]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.783-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
@@ -48,9 +55,9 @@ export default async function Home() {
             </h2>
             <Link href={`/blog/${featuredPost.slug}`} className="block group">
               <div className="card md:flex">
-                <div className="md:w-1/2 relative h-64 md:h-auto">
+                <div className="md:w-1/2 relative h-64 md:h-auto overflow-hidden">
                   {/* プレースホルダー画像 - 実際の記事画像に置き換える */}
-                  <div className="absolute inset-0 bg-[#e2ddd5] flex items-center justify-center">
+                  <div className="absolute inset-0 bg-[#e2ddd5] flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
                     <span className="text-[#6f4e37]">記事のサムネイル画像</span>
                   </div>
                 </div>
@@ -76,7 +83,7 @@ export default async function Home() {
                   </p>
                   <span className="inline-flex items-center text-[#6f4e37] font-medium group-hover:text-[#5a3e2c]">
                     続きを読む
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-1 transform group-hover:translate-x-1 transition-transform" viewBox="0 0 20 20" fill="currentColor">
                       <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                     </svg>
                   </span>
@@ -87,7 +94,7 @@ export default async function Home() {
         )}
 
         {/* 人気ランキング */}
-        <section>
+        <section className="animate-slideUp delay-100">
           <h2 className="text-2xl font-bold text-[#2d2926] mb-6 flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2 text-[#bd8c7d]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
@@ -99,19 +106,19 @@ export default async function Home() {
               <Link
                 href={`/blog/${post.slug}`}
                 key={post.slug}
-                className="block group relative"
+                className="block group relative animate-scale delay-100"
               >
-                <div className="card overflow-hidden">
+                <div className="card overflow-hidden hover:shadow-lg transition-all duration-500 transform-gpu hover:-translate-y-1">
                   <div className="relative">
                     <div className="relative h-48 bg-[#e2ddd5] overflow-hidden">
                       {post.frontMatter.thumbnail ? (
                         <img 
                           src={post.frontMatter.thumbnail} 
                           alt={post.frontMatter.title} 
-                          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                         />
                       ) : (
-                        <div className="w-full h-full flex items-center justify-center">
+                        <div className="w-full h-full flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
                           <span className="text-[#6f4e37]">記事のサムネイル</span>
                         </div>
                       )}
@@ -154,7 +161,7 @@ export default async function Home() {
         </section>
 
         {/* カテゴリーリンク */}
-        <section>
+        <section className="animate-slideUp delay-200">
           <h2 className="text-2xl font-bold text-[#2d2926] mb-6">カテゴリー</h2>
           <div className="grid gap-4 grid-cols-2 md:grid-cols-4">
             {[
@@ -166,7 +173,7 @@ export default async function Home() {
               <Link 
                 key={category.slug}
                 href={`/tag/${category.slug}`}
-                className="card p-6 text-center"
+                className="card p-6 text-center hover:bg-[#f9f7f5] transition-all duration-500 hover:shadow-lg transform-gpu hover:-translate-y-1 animate-scale delay-200"
               >
                 <div className="text-3xl mb-2">{category.icon}</div>
                 <h3 className="font-medium text-[#2d2926]">{category.name}</h3>
@@ -176,18 +183,20 @@ export default async function Home() {
         </section>
 
         {/* 最新の記事 */}
-        <section>
+        <section className="animate-slideUp delay-300">
           <h2 className="text-2xl font-bold text-[#2d2926] mb-6">最新の記事</h2>
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {otherPosts.map((post) => (
               <Link
                 href={`/blog/${post.slug}`}
                 key={post.slug}
-                className="block group"
+                className="block group animate-scale delay-300"
               >
-                <div className="card h-full flex flex-col">
-                  <div className="relative h-48 bg-[#e2ddd5] flex items-center justify-center">
-                    <span className="text-[#6f4e37]">記事のサムネイル</span>
+                <div className="card h-full flex flex-col overflow-hidden hover:shadow-lg transition-all duration-500 transform-gpu hover:-translate-y-1">
+                  <div className="relative h-48 bg-[#e2ddd5] flex items-center justify-center overflow-hidden">
+                    <div className="w-full h-full flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
+                      <span className="text-[#6f4e37]">記事のサムネイル</span>
+                    </div>
                   </div>
                   <div className="p-5 flex-grow flex flex-col">
                     <div className="flex flex-wrap mb-2">
@@ -222,7 +231,7 @@ export default async function Home() {
         </section>
 
         {/* ニュースレター登録 */}
-        <section className="bg-[#f1eeea] rounded-lg p-8 text-center border border-[#e2ddd5]">
+        <section className="bg-[#f1eeea] rounded-lg p-8 text-center border border-[#e2ddd5] animate-slideUp delay-400">
           <h2 className="text-2xl font-bold text-[#2d2926] mb-4">最新情報をお届けします</h2>
           <p className="text-[#3c3732] mb-6 max-w-2xl mx-auto">
             新しいガジェット情報やレビュー記事などを、いち早くお届けします。メールアドレスをご登録ください。

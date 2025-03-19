@@ -1,44 +1,131 @@
+"use client";
+
 import Link from "next/link";
-import dynamic from "next/dynamic";
+import { usePathname } from "next/navigation";
+import { useEffect, useState, useRef } from "react";
+import SearchBar from "./SearchBar";
 
-// クライアントコンポーネントを動的にインポート
-const SearchBar = dynamic(() => import("./SearchBar"), { ssr: false });
+export default function Layout({ children, heroMode = false }: { children: React.ReactNode, heroMode?: boolean }) {
+  const pathname = usePathname();
+  const [scrolled, setScrolled] = useState(false);
+  const [searchExpanded, setSearchExpanded] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const searchInputRef = useRef<HTMLInputElement>(null);
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+  // スクロール検出 - パフォーマンス最適化
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 10;
+      if (isScrolled !== scrolled) {
+        setScrolled(isScrolled);
+      }
+    };
+
+    // スクロールイベントを間引く（スロットリング）
+    let isScrolling = false;
+    const throttledScroll = () => {
+      if (!isScrolling) {
+        window.requestAnimationFrame(() => {
+          handleScroll();
+          isScrolling = false;
+        });
+        isScrolling = true;
+      }
+    };
+
+    window.addEventListener("scroll", throttledScroll);
+    return () => window.removeEventListener("scroll", throttledScroll);
+  }, [scrolled]);
+
+  // ホームページかどうか
+  const isHomePage = pathname === "/";
+  
+  // ヘッダークラス - ホームページのHero表示用
+  const headerClasses = isHomePage && heroMode && !scrolled
+    ? "bg-transparent absolute top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out flex justify-center w-full"
+    : "bg-white shadow-sm sticky top-0 z-50 border-b border-[#e2ddd5] transition-all duration-500 ease-in-out";
+
+  // 検索ボタンをクリックしたとき
+  const toggleSearch = () => {
+    setSearchExpanded(!searchExpanded);
+    // 検索が表示されたらフォーカスする
+    if (!searchExpanded) {
+      setTimeout(() => {
+        searchInputRef.current?.focus();
+      }, 100);
+    }
+  };
+
+  // モバイルメニュー表示切替
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
+
   return (
     <div className="min-h-screen bg-[#f9f7f5]">
-      <header className="bg-white shadow-sm sticky top-0 z-50 border-b border-[#e2ddd5]">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <header className={headerClasses}>
+        <div className={`${isHomePage && heroMode && !scrolled ? 'w-full max-w-4xl' : 'max-w-6xl w-full'} mx-auto px-4 sm:px-6 lg:px-8`}>
           <div className="flex justify-between items-center h-16">
             <Link href="/" className="flex items-center space-x-2">
-              <span className="font-bold text-xl text-gray-800">Gadget Blog</span>
+              <span className={`font-bold text-xl ${isHomePage && heroMode && !scrolled ? 'text-white' : 'text-gray-800'}`}>
+                Gadget Blog
+              </span>
             </Link>
             
             {/* デスクトップメニュー */}
-            <div className="hidden md:flex items-center space-x-6">
-              <Link href="/" className="text-gray-600 hover:text-gray-900 font-medium">
+            <div className={`hidden md:flex items-center ${isHomePage && heroMode && !scrolled ? 'space-x-5' : 'space-x-7'}`}>
+              <Link 
+                href="/" 
+                className={`font-medium ${isHomePage && heroMode && !scrolled 
+                  ? 'text-white hover:text-gray-200' 
+                  : 'text-gray-600 hover:text-gray-900'}`}
+              >
                 Home
               </Link>
-              <Link href="/contact" className="text-gray-600 hover:text-gray-900 font-medium">
+              <Link 
+                href="/contact" 
+                className={`font-medium ${isHomePage && heroMode && !scrolled 
+                  ? 'text-white hover:text-gray-200' 
+                  : 'text-gray-600 hover:text-gray-900'}`}
+              >
                 Contact
               </Link>
-              <Link href="/profile" className="text-gray-600 hover:text-gray-900 font-medium">
+              <Link 
+                href="/profile" 
+                className={`font-medium ${isHomePage && heroMode && !scrolled 
+                  ? 'text-white hover:text-gray-200' 
+                  : 'text-gray-600 hover:text-gray-900'}`}
+              >
                 Profile
               </Link>
-              <Link href="/privacy" className="text-gray-600 hover:text-gray-900 font-medium">
+              <Link 
+                href="/privacy" 
+                className={`font-medium ${isHomePage && heroMode && !scrolled 
+                  ? 'text-white hover:text-gray-200' 
+                  : 'text-gray-600 hover:text-gray-900'}`}
+              >
                 Privacy Policy
               </Link>
               
-              {/* 検索ボタン */}
+              {/* 検索ボタン - PCの場合は虫眼鏡のみ表示 */}
               <button 
                 type="button"
-                className="text-gray-600 hover:text-gray-900"
-                id="search-button"
-                aria-expanded="false"
+                className={`transition-all duration-300 relative overflow-hidden ${isHomePage && heroMode && !scrolled 
+                  ? 'text-white hover:text-gray-200' 
+                  : 'text-gray-600 hover:text-gray-900'}`}
+                onClick={toggleSearch}
+                aria-expanded={searchExpanded ? "true" : "false"}
               >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
+                <span className={`transition-all duration-500 flex items-center justify-center transform ${searchExpanded ? 'rotate-90 scale-0 opacity-0' : 'rotate-0 scale-100 opacity-100'}`} style={{width: '20px', height: '20px'}}>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                </span>
+                <span className={`absolute inset-0 transition-all duration-500 flex items-center justify-center transform ${searchExpanded ? 'rotate-0 scale-100 opacity-100' : '-rotate-90 scale-0 opacity-0'}`}>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </span>
               </button>
             </div>
             
@@ -46,8 +133,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <div className="flex items-center md:hidden">
               <button 
                 type="button"
-                className="text-gray-600 hover:text-gray-900 p-2"
+                className={`p-2 ${isHomePage && heroMode && !scrolled 
+                  ? 'text-white hover:text-gray-200' 
+                  : 'text-gray-600 hover:text-gray-900'}`}
                 aria-label="メニューを開く"
+                onClick={toggleMobileMenu}
+                aria-expanded={mobileMenuOpen ? "true" : "false"}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
@@ -56,30 +147,122 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             </div>
           </div>
           
-          {/* 検索バー */}
-          <div className="pt-2 pb-4 hidden md:block" id="search-container">
-            <SearchBar />
+          {/* PC用検索バー - クリックで表示/非表示 */}
+          <div className={`pt-2 pb-4 hidden md:block transition-all duration-500 ease-in-out overflow-hidden ${searchExpanded ? 'h-16 opacity-100' : 'h-0 opacity-0'}`}>
+            <div className="transform-gpu will-change-transform animate-slideDown">
+              <SearchBar />
+            </div>
           </div>
         </div>
         
-        {/* モバイルメニュー - 初期状態では非表示 */}
-        <div className="hidden md:hidden" id="mobile-menu">
-          <div className="px-4 pt-2 pb-3 space-y-1 border-t">
-            <Link href="/" className="block py-2 text-base font-medium text-gray-600 hover:text-gray-900">
+        {/* モバイルメニュー - 改良版 */}
+        <div className={`md:hidden overflow-hidden ${mobileMenuOpen ? 'block' : 'hidden h-0'}`}>
+          <div className={`${mobileMenuOpen ? 'animate-slideDown' : ''} transform-gpu will-change-transform`}>
+          <div className="px-4 pt-2 pb-3 space-y-1 border-t bg-[#f9f7f5]">
+            <Link 
+              href="/" 
+              className="block py-2 text-base font-medium text-gray-600 hover:text-gray-900"
+              onClick={() => setMobileMenuOpen(false)}
+            >
               Home
             </Link>
-            <Link href="/contact" className="block py-2 text-base font-medium text-gray-600 hover:text-gray-900">
+            <Link 
+              href="/contact" 
+              className="block py-2 text-base font-medium text-gray-600 hover:text-gray-900"
+              onClick={() => setMobileMenuOpen(false)}
+            >
               Contact
             </Link>
-            <Link href="/profile" className="block py-2 text-base font-medium text-gray-600 hover:text-gray-900">
+            <Link 
+              href="/profile" 
+              className="block py-2 text-base font-medium text-gray-600 hover:text-gray-900"
+              onClick={() => setMobileMenuOpen(false)}
+            >
               Profile
             </Link>
-            <Link href="/privacy" className="block py-2 text-base font-medium text-gray-600 hover:text-gray-900">
+            <Link 
+              href="/privacy" 
+              className="block py-2 text-base font-medium text-gray-600 hover:text-gray-900"
+              onClick={() => setMobileMenuOpen(false)}
+            >
               Privacy Policy
             </Link>
-            <div className="pt-2">
+            <div className="pt-4 pb-2">
               <SearchBar />
             </div>
+            
+            {/* 人気記事ランキング - モバイル用 */}
+            <div className="mt-6 pt-4 border-t border-[#e2ddd5]">
+              <h3 className="text-lg font-bold text-[#2d2926] mb-4">人気記事ランキング</h3>
+              <div className="space-y-4">
+                <div className="flex items-start space-x-4">
+                  <div className="flex-shrink-0 w-16 h-16 bg-[#e2ddd5] flex items-center justify-center rounded-md overflow-hidden group-hover:scale-105 transition-transform duration-500 ease-in-out">
+                    <span className="text-[#6f4e37] text-xs">サムネイル</span>
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-medium text-[#2d2926] line-clamp-2">
+                      <Link 
+                        href="/blog/demo-news1" 
+                        className="hover:text-[#7d5a46]"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        最新のガジェットトレンドと2025年の予測
+                      </Link>
+                    </h4>
+                    <div className="flex items-center mt-1">
+                      <span className="text-xs text-[#6f4e37]">2024.3.1</span>
+                      <span className="mx-2 text-xs text-[#6f4e37]">•</span>
+                      <span className="text-xs text-[#6f4e37]">182 views</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="flex items-start space-x-4">
+                  <div className="flex-shrink-0 w-16 h-16 bg-[#e2ddd5] flex items-center justify-center rounded-md overflow-hidden group-hover:scale-105 transition-transform duration-500 ease-in-out">
+                    <span className="text-[#6f4e37] text-xs">サムネイル</span>
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-medium text-[#2d2926] line-clamp-2">
+                      <Link 
+                        href="/blog/demo-review1" 
+                        className="hover:text-[#7d5a46]"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        最新ワイヤレスイヤホン比較レビュー
+                      </Link>
+                    </h4>
+                    <div className="flex items-center mt-1">
+                      <span className="text-xs text-[#6f4e37]">2024.2.15</span>
+                      <span className="mx-2 text-xs text-[#6f4e37]">•</span>
+                      <span className="text-xs text-[#6f4e37]">156 views</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="flex items-start space-x-4">
+                  <div className="flex-shrink-0 w-16 h-16 bg-[#e2ddd5] flex items-center justify-center rounded-md overflow-hidden group-hover:scale-105 transition-transform duration-500 ease-in-out">
+                    <span className="text-[#6f4e37] text-xs">サムネイル</span>
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-medium text-[#2d2926] line-clamp-2">
+                      <Link 
+                        href="/blog/first-post" 
+                        className="hover:text-[#7d5a46]"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        新しいガジェットブログをはじめました
+                      </Link>
+                    </h4>
+                    <div className="flex items-center mt-1">
+                      <span className="text-xs text-[#6f4e37]">2024.1.1</span>
+                      <span className="mx-2 text-xs text-[#6f4e37]">•</span>
+                      <span className="text-xs text-[#6f4e37]">122 views</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
           </div>
         </div>
       </header>
@@ -184,43 +367,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
         </div>
       </footer>
-      
-      {/* 検索とメニューの表示・非表示を制御するためのクライアントサイドスクリプト */}
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `
-            document.addEventListener('DOMContentLoaded', function() {
-              // 検索ボタンとコンテナ
-              const searchButton = document.getElementById('search-button');
-              const searchContainer = document.getElementById('search-container');
-              
-              // 検索ボタンクリックイベント
-              if (searchButton && searchContainer) {
-                searchContainer.classList.add('hidden');
-                
-                searchButton.addEventListener('click', function() {
-                  searchContainer.classList.toggle('hidden');
-                  const expanded = searchContainer.classList.contains('hidden') ? 'false' : 'true';
-                  searchButton.setAttribute('aria-expanded', expanded);
-                });
-              }
-              
-              // モバイルメニューボタンとメニュー
-              const mobileMenuButton = document.querySelector('button[aria-label="メニューを開く"]');
-              const mobileMenu = document.getElementById('mobile-menu');
-              
-              // モバイルメニューボタンクリックイベント
-              if (mobileMenuButton && mobileMenu) {
-                mobileMenuButton.addEventListener('click', function() {
-                  mobileMenu.classList.toggle('hidden');
-                  const expanded = mobileMenu.classList.contains('hidden') ? 'false' : 'true';
-                  mobileMenuButton.setAttribute('aria-expanded', expanded);
-                });
-              }
-            });
-          `,
-        }}
-      />
     </div>
   );
 }
