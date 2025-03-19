@@ -101,12 +101,22 @@ export default async function Home() {
                 key={post.slug}
                 className="block group relative"
               >
-                <div className="card">
+                <div className="card overflow-hidden">
                   <div className="relative">
-                    <div className="relative h-48 bg-[#e2ddd5] flex items-center justify-center">
-                      <span className="text-[#6f4e37]">記事のサムネイル</span>
+                    <div className="relative h-48 bg-[#e2ddd5] overflow-hidden">
+                      {post.frontMatter.thumbnail ? (
+                        <img 
+                          src={post.frontMatter.thumbnail} 
+                          alt={post.frontMatter.title} 
+                          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center">
+                          <span className="text-[#6f4e37]">記事のサムネイル</span>
+                        </div>
+                      )}
                     </div>
-                    <div className="absolute top-3 left-3 w-10 h-10 bg-[#6f4e37] rounded-full flex items-center justify-center text-white font-bold text-lg z-10">
+                    <div className="absolute top-3 left-3 w-10 h-10 bg-[#7d5a46] rounded-full flex items-center justify-center text-white font-bold text-lg z-10 shadow-md">
                       {index + 1}
                     </div>
                   </div>
@@ -116,12 +126,12 @@ export default async function Home() {
                         <span key={tag}>
                           <TagLink
                             tag={tag}
-                            className="mr-2 mb-2 px-2 py-1 bg-[#f1eeea] text-[#6f4e37] text-xs rounded-md hover:bg-[#e2ddd5] transition-colors"
+                            className="mr-2 mb-2 px-2 py-1 bg-[#f1eeea] text-[#6f4e37] text-xs rounded-full hover:bg-[#e2ddd5] transition-colors"
                           />
                         </span>
                       ))}
                     </div>
-                    <h3 className="text-lg font-semibold text-[#2d2926] group-hover:text-[#6f4e37] transition-colors duration-300 mb-2 line-clamp-2">
+                    <h3 className="text-lg font-semibold text-[#2d2926] group-hover:text-[#7d5a46] transition-colors duration-300 mb-2 line-clamp-2">
                       {post.frontMatter.title}
                     </h3>
                     <div className="flex items-center justify-between text-sm">

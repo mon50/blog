@@ -282,7 +282,7 @@ export default async function BlogPost({ params }: { params: PageParams }) {
                     目次
                   </h3>
                   <nav className="text-sm">
-                    <ul className="space-y-2">
+                    <ul className="space-y-3">
                       {headings.map((heading, index) => (
                         <li 
                           key={index} 
@@ -295,9 +295,10 @@ export default async function BlogPost({ params }: { params: PageParams }) {
                         >
                           <a 
                             href={`#${heading.id}`} 
-                            className="text-[#6f4e37] hover:text-[#5a3e2c] hover:underline underline-offset-2"
+                            className="text-[#7d5a46] hover:text-[#5a3e2c] transition-colors duration-150 flex items-center group"
                           >
-                            {heading.text}
+                            <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#bd8c7d] mr-2 group-hover:bg-[#7d5a46] transition-colors"></span>
+                            <span className="group-hover:underline underline-offset-2">{heading.text}</span>
                           </a>
                         </li>
                       ))}
@@ -314,18 +315,28 @@ export default async function BlogPost({ params }: { params: PageParams }) {
                   </svg>
                   人気記事
                 </h3>
-                <div className="space-y-4">
+                <div className="space-y-5">
                   {popularPosts.map((post, index) => (
                     <Link
                       href={`/blog/${post.slug}`}
                       key={post.slug}
                       className="flex items-start space-x-3 group"
                     >
-                      <div className="flex-shrink-0 w-8 h-8 bg-[#f1eeea] rounded-full flex items-center justify-center text-[#6f4e37] font-medium">
-                        {index + 1}
+                      <div className="flex-shrink-0 w-10 h-10 overflow-hidden rounded-full border-2 border-[#f1eeea]">
+                        {post.frontMatter.thumbnail ? (
+                          <img 
+                            src={post.frontMatter.thumbnail}
+                            alt={post.frontMatter.title}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <div className="w-full h-full bg-[#f1eeea] flex items-center justify-center text-[#7d5a46] font-medium">
+                            {index + 1}
+                          </div>
+                        )}
                       </div>
-                      <div>
-                        <h4 className="text-[#2d2926] font-medium line-clamp-2 group-hover:text-[#6f4e37] transition-colors">
+                      <div className="flex-1">
+                        <h4 className="text-[#2d2926] font-medium line-clamp-2 group-hover:text-[#7d5a46] transition-colors">
                           {post.frontMatter.title}
                         </h4>
                         <span className="text-xs text-[#6f4e37]">
