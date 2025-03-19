@@ -3,6 +3,8 @@ import path from "path";
 import matter from "gray-matter";
 import { serialize } from "next-mdx-remote/serialize";
 import rehypeHighlight from "rehype-highlight";
+import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
 
 const postsDirectory = path.join(process.cwd(), "src/content/posts");
 
@@ -82,7 +84,8 @@ export async function getMostViewedPosts(limit = 5) {
 export async function serializeMDX(content: string) {
   return serialize(content, {
     mdxOptions: {
-      rehypePlugins: [rehypeHighlight],
+      remarkPlugins: [remarkGfm],
+      rehypePlugins: [rehypeHighlight, [rehypeRaw, { passThrough: ['mdxJsxFlowElement', 'mdxJsxTextElement'] }]],
     },
     parseFrontmatter: true,
   });

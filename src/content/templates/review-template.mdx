@@ -9,11 +9,20 @@ category: "レビュー"
 
 # 【製品名】レビュー：特長と使用感を徹底解説
 
-![製品のメイン画像](/images/reviews/sample-main.jpg)
+<Image 
+  src="/images/reviews/sample-main.jpg" 
+  alt="製品のメイン画像" 
+  width={1200} 
+  height={675} 
+/>
 
 ## はじめに
 
 このレビューでは、【製品名】について詳しく解説します。【製品名】は【製品の概要】で、【主な特徴】が特徴の製品です。
+
+:::note info
+このレビューは実際に製品を使用して作成しています。（提供品の場合はその旨を明記）
+:::
 
 **レビューのポイント：**
 - デザインと外観
@@ -37,26 +46,52 @@ category: "レビュー"
 
 パッケージ内容と初期印象について記述します。箱のデザインや同梱物、製品の質感などについての第一印象を伝えます。
 
-![開封の様子](/images/reviews/sample-unboxing.jpg)
+<Image 
+  src="/images/reviews/sample-unboxing.jpg" 
+  alt="開封の様子" 
+  width={800} 
+  height={600} 
+/>
 
 ## デザインと外観
 
 製品のデザイン、素材、質感、カラーバリエーションなどについて詳しく記述します。
 
+<Image 
+  src="/images/reviews/sample-design.jpg" 
+  alt="製品のデザイン" 
+  width={800} 
+  height={600} 
+/>
+
 ## 機能と性能
 
 ### 主要機能1
+
+<Image 
+  src="/images/reviews/feature1.jpg" 
+  alt="主要機能1の画像" 
+  width={800} 
+  height={600} 
+/>
+
 主要機能についての詳細な説明とテスト結果。
 
 ### 主要機能2
+
 主要機能についての詳細な説明とテスト結果。
 
 ### 主要機能3
+
 主要機能についての詳細な説明とテスト結果。
 
 ## 実際の使用感
 
 日常的に使用した際の感想や、使い勝手のよい点・悪い点について記述します。
+
+:::note warn
+使用における注意点や、特定の条件下でのみ発生する問題などがあれば、ここに記述します。
+:::
 
 ## バッテリー性能（該当する場合）
 
@@ -74,6 +109,26 @@ category: "レビュー"
 - 気になる点2
 - 気になる点3
 
+## 他製品との比較
+
+| 機能/特徴 | 本製品 | 競合製品A | 競合製品B |
+|---------|-------|---------|---------|
+| 機能1    | ○    | △       | ×       |
+| 機能2    | ○    | ○       | △       |
+| 価格     | 高い  | 普通     | 安い    |
+
+## ユーザーの声
+
+SNSやレビューサイトからの実際のユーザーの声を引用します。
+
+<Tweet id="1234567890" />
+
+## 使用例・活用シーン
+
+<YouTube id="abcdefghijk" />
+
+製品の具体的な使用例や活用シーンについて説明します。
+
 ## まとめ
 
 製品全体の評価と、どのような人にオススメできるかをまとめます。
@@ -88,6 +143,19 @@ category: "レビュー"
   rating={4.5}
   amazonUrl="https://amazon.co.jp/..."
   rakutenUrl="https://rakuten.co.jp/..."
+  yahooUrl="https://shopping.yahoo.co.jp/..."
+/>
+
+## 関連製品
+
+<AffiliateLink
+  title="【関連製品名】"
+  imageUrl="/images/reviews/related-product.jpg"
+  price="〇〇,〇〇〇円（税込）"
+  description="【関連製品の簡単な説明】"
+  rating={4.0}
+  amazonUrl="https://amazon.co.jp/..."
+  rakutenUrl="https://rakuten.co.jp/..."
 />
 
 ## 関連記事
@@ -95,3 +163,7 @@ category: "レビュー"
 - [関連記事1のタイトル](/blog/related-post-1)
 - [関連記事2のタイトル](/blog/related-post-2)
 - [関連記事3のタイトル](/blog/related-post-3)
+
+## 更新履歴
+
+<Date dateString="YYYY-MM-DD" /> 初版公開

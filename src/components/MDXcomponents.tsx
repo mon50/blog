@@ -88,31 +88,34 @@ const MDXComponents = {
   Date: Date,
   Note: Note,
 
+  // 表関連のコンポーネント
   table: (props: React.HTMLAttributes<HTMLTableElement>) => (
-    <table {...props} className="table-auto border-collapse w-full">
-    {props.children}
-    </table>
-    ),
-    thead: (props: React.HTMLAttributes<HTMLTableSectionElement>) => (
-    <thead {...props}>
-    {props.children}
+    <div className="overflow-x-auto my-6">
+      <table {...props} className="table-auto border-collapse w-full">
+        {props.children}
+      </table>
+    </div>
+  ),
+  thead: (props: React.HTMLAttributes<HTMLTableSectionElement>) => (
+    <thead {...props} className="bg-gray-50">
+      {props.children}
     </thead>
-    ),
-    th: (props: React.ThHTMLAttributes<HTMLTableHeaderCellElement>) => (
+  ),
+  th: (props: React.ThHTMLAttributes<HTMLTableHeaderCellElement>) => (
     <th {...props} className="border px-4 py-2 bg-gray-200">
-    {props.children}
+      {props.children}
     </th>
-    ),
-    tr: (props: React.HTMLAttributes<HTMLTableRowElement>) => (
-    <tr {...props}>
-    {props.children}
+  ),
+  tr: (props: React.HTMLAttributes<HTMLTableRowElement>) => (
+    <tr {...props} className="even:bg-gray-50">
+      {props.children}
     </tr>
-    ),
-    td: (props: React.TdHTMLAttributes<HTMLTableDataCellElement>) => (
+  ),
+  td: (props: React.TdHTMLAttributes<HTMLTableDataCellElement>) => (
     <td {...props} className="border px-4 py-2">
-    {props.children}
+      {props.children}
     </td>
-    ),
+  ),
   
   // カスタムラッパー
   wrapper: ({ children }: { children: ReactNode }) => {
