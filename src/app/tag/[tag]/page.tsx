@@ -46,10 +46,7 @@ export default async function TagPage({ params }: { params: { tag: string } }) {
 
             <div className="space-y-8">
               {posts.map((post) => (
-                <article
-                  key={post.slug}
-                  className="card"
-                >
+                <article key={post.slug} className="card">
                   <Link href={`/blog/${post.slug}`} className="block group">
                     <div className="p-6">
                       <h2 className="text-xl font-bold text-[#2d2926] group-hover:text-[#6f4e37] transition-colors mb-2">
@@ -57,12 +54,14 @@ export default async function TagPage({ params }: { params: { tag: string } }) {
                       </h2>
                       <div className="flex items-center text-sm text-[#6f4e37] mb-3">
                         <time dateTime={post.frontMatter.date}>
-                          {format(parseISO(post.frontMatter.date), "yyyy年MM月dd日", { locale: ja })}
+                          {format(
+                            parseISO(post.frontMatter.date),
+                            "yyyy/MM/dd",
+                            { locale: ja },
+                          )}
                         </time>
                         <span className="mx-2">•</span>
-                        <span>
-                          {post.frontMatter.viewCount || 0}回表示
-                        </span>
+                        <span>{post.frontMatter.viewCount || 0}回表示</span>
                       </div>
                       {post.frontMatter.excerpt && (
                         <p className="text-[#3c3732] mb-4">

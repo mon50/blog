@@ -17,22 +17,26 @@ export default async function CategoryPage({
   const categories = {
     smartphone: {
       title: "スマートフォン",
-      description: "最新のスマートフォンのレビュー、比較、使い方などの情報を紹介します。",
+      description:
+        "最新のスマートフォンのレビュー、比較、使い方などの情報を紹介します。",
       icon: "📱",
     },
     audio: {
       title: "オーディオ",
-      description: "イヤホン、ヘッドホン、スピーカーなどのオーディオ機器に関する情報を紹介します。",
+      description:
+        "イヤホン、ヘッドホン、スピーカーなどのオーディオ機器に関する情報を紹介します。",
       icon: "🎧",
     },
     pc: {
       title: "PC・周辺機器",
-      description: "パソコン本体やキーボード、マウスなどの周辺機器に関する情報を紹介します。",
+      description:
+        "パソコン本体やキーボード、マウスなどの周辺機器に関する情報を紹介します。",
       icon: "💻",
     },
     smartwatch: {
       title: "スマートウォッチ",
-      description: "スマートウォッチやフィットネストラッカーなどのウェアラブルデバイスを紹介します。",
+      description:
+        "スマートウォッチやフィットネストラッカーなどのウェアラブルデバイスを紹介します。",
       icon: "⌚",
     },
     featured: {
@@ -94,7 +98,7 @@ export default async function CategoryPage({
                       {post.frontMatter.title}
                     </h3>
                     <time className="text-sm text-gray-600 mb-3 block">
-                      {format(parseISO(post.frontMatter.date), "yyyy年MM月dd日", {
+                      {format(parseISO(post.frontMatter.date), "yyyy/MM/dd", {
                         locale: ja,
                       })}
                     </time>

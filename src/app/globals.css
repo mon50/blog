@@ -39,7 +39,12 @@ body {
 }
 
 /* カフェスタイルのタイポグラフィ */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   @apply font-medium tracking-tight;
 }
 
@@ -68,76 +73,84 @@ html {
 
 /* アニメーション */
 @keyframes highlight {
-  from { background-color: rgba(189, 140, 125, 0.2); }
-  to { background-color: transparent; }
+  from {
+    background-color: rgba(189, 140, 125, 0.2);
+  }
+  to {
+    background-color: transparent;
+  }
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes slideDown {
-  from { 
+  from {
     opacity: 0;
     transform: translateY(-20px);
   }
-  to { 
+  to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
 @keyframes growWidth {
-  from { 
+  from {
     width: 0;
     opacity: 0;
   }
-  to { 
+  to {
     width: 100%;
     opacity: 1;
   }
 }
 
 @keyframes slideUp {
-  from { 
+  from {
     opacity: 0;
     transform: translateY(20px);
   }
-  to { 
+  to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
 @keyframes slideInRight {
-  from { 
+  from {
     opacity: 0;
     transform: translateX(30px);
   }
-  to { 
+  to {
     opacity: 1;
     transform: translateX(0);
   }
 }
 
 @keyframes slideInLeft {
-  from { 
+  from {
     opacity: 0;
     transform: translateX(-30px);
   }
-  to { 
+  to {
     opacity: 1;
     transform: translateX(0);
   }
 }
 
 @keyframes scale {
-  from { 
+  from {
     opacity: 0;
-    transform: scale(0.9); 
+    transform: scale(0.9);
   }
-  to { 
+  to {
     opacity: 1;
     transform: scale(1);
   }
@@ -197,7 +210,7 @@ html {
 .hero-section {
   position: relative;
   background-color: #2d2926;
-  background-image: url('/images/hero-bg.jpg'); /* 適切な背景画像を用意 */
+  background-image: url("/images/hero-bg.jpg"); /* 適切な背景画像を用意 */
   background-size: cover;
   background-position: center;
   color: white;
@@ -213,13 +226,17 @@ html {
 }
 
 .hero-section::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(to right, rgba(45, 41, 38, 0.8), rgba(45, 41, 38, 0.4));
+  background: linear-gradient(
+    to right,
+    rgba(45, 41, 38, 0.8),
+    rgba(45, 41, 38, 0.4)
+  );
 }
 
 .hero-content {

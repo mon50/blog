@@ -22,7 +22,9 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
 
         {!query && (
           <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-8">
-            <p className="text-yellow-800">検索キーワードを入力してください。</p>
+            <p className="text-yellow-800">
+              検索キーワードを入力してください。
+            </p>
           </div>
         )}
 
@@ -72,12 +74,14 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
                       </h2>
                       <div className="flex items-center text-sm text-gray-500 mb-3">
                         <time dateTime={post.frontMatter.date}>
-                          {format(parseISO(post.frontMatter.date), "yyyy年MM月dd日", { locale: ja })}
+                          {format(
+                            parseISO(post.frontMatter.date),
+                            "yyyy/MM/dd",
+                            { locale: ja },
+                          )}
                         </time>
                         <span className="mx-2">•</span>
-                        <span>
-                          {post.frontMatter.viewCount || 0}回表示
-                        </span>
+                        <span>{post.frontMatter.viewCount || 0}回表示</span>
                       </div>
                       {post.frontMatter.excerpt && (
                         <p className="text-gray-600 mb-4">
