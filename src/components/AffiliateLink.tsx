@@ -22,6 +22,7 @@ const AffiliateLink: React.FC<AffiliateLinkProps> = ({
   rakutenUrl,
   yahooUrl,
 }) => {
+  const shortTitle = title.length > 50 ? title.slice(0, 50) + '...' : title;
   const renderStars = (rating: number) => {
     const stars = [];
     const fullStars = Math.floor(rating);
@@ -93,7 +94,7 @@ const AffiliateLink: React.FC<AffiliateLinkProps> = ({
           )}
         </div>
         <div className="p-6 md:w-2/3">
-          <h3 className="text-xl font-bold mb-3 text-[#2d2926]">{title}</h3>
+          <h3 className="text-xl font-bold mb-3 text-[#2d2926]">{shortTitle}</h3>
           
           {rating > 0 && (
             <div className="flex items-center mb-3">
@@ -111,36 +112,31 @@ const AffiliateLink: React.FC<AffiliateLinkProps> = ({
           )}
           
           {description && (
-            <p className="text-[#6f4e37] mb-4 text-sm">{description}</p>
+            <p className="text-[#6f4e37] mb-4 text-sm line-clamp-2">{description}</p>
           )}
           
-          <div className="flex flex-wrap gap-3 mt-4">
-            {amazonUrl && (
-              <a
-                href={amazonUrl}
-                target="_blank"
-                rel="noopener noreferrer sponsored"
-                className="inline-flex items-center px-5 py-2.5 bg-[#FF9900] text-[#2d2926] rounded-md font-medium hover:bg-opacity-90 transition-colors"
-              >
-                <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M13.958 10.09c0 1.232.029 2.256-.591 3.351-.502.891-1.301 1.438-2.186 1.438-1.214 0-1.922-.924-1.922-2.292 0-2.692 2.415-3.182 4.7-3.182v.685h-.001zm3.186 7.705c-.209.189-.512.256-.75.096-1.058-.88-1.245-1.287-1.823-2.131-1.738 1.776-2.972 2.309-5.229 2.309-2.67 0-4.751-1.647-4.751-4.947 0-2.576 1.396-4.33 3.382-5.188 1.716-.761 4.113-.897 5.949-1.105v-.41c0-.753.06-1.642-.384-2.294-.385-.577-1.124-.815-1.775-.815-1.205 0-2.277.62-2.541 1.909-.054.293-.261.582-.545.596l-3.047-.333c-.258-.056-.545-.266-.469-.66.701-3.69 4.03-4.8 7.016-4.8 1.526 0 3.518.406 4.719 1.56 1.526 1.424 1.385 3.316 1.385 5.429v4.908c0 1.471.613 2.119 1.188 2.915.202.283.247.622-.01.833l-2.316 2.028h.001zm-13.205-5.414C4 12.694 4.086 13.086 4.086 13.5c0 4.5-4.5 4.5-6.25 5v-5.106C-.75 13.394.495 11.981 3.94 12.381z" />
-                </svg>
-                Amazonで見る
-              </a>
-            )}
-            {rakutenUrl && (
-              <a
-                href={rakutenUrl}
-                target="_blank"
-                rel="noopener noreferrer sponsored"
-                className="inline-flex items-center px-5 py-2.5 bg-[#BF0000] text-white rounded-md font-medium hover:bg-opacity-90 transition-colors"
-              >
-                <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M21.552 6.238H16.93v2.51h4.625v1.598h-4.623v4.232h-1.96V4.64h6.58v1.598zM11.167 14.58h-1.96v-3.376H4.31V14.6h-1.96V4.638H4.31v4.867h4.897V4.66h1.96v9.92z" />
-                </svg>
-                楽天市場で見る
-              </a>
-            )}
+          <div className="flex flex-col md:flex-row gap-3 mt-4">
+          {amazonUrl && (
+  <a
+    href={amazonUrl}
+    target="_blank"
+    rel="noopener noreferrer sponsored"
+    className="inline-flex items-center px-5 py-2.5 bg-[#FFE5CC] text-[#B12704] text-base rounded-md font-medium hover:bg-[#FFD1A3] transition-colors"
+  >
+    Amazonで見る
+  </a>
+)}
+{rakutenUrl && (
+  <a
+    href={rakutenUrl}
+    target="_blank"
+    rel="noopener noreferrer sponsored"
+    className="inline-flex items-center px-5 py-2.5 bg-[#FFF0F0] text-[#BF0000] text-base rounded-md font-medium hover:bg-[#FFD6D6] transition-colors"
+  >
+    楽天市場で見る
+  </a>
+)}
+
             {yahooUrl && (
               <a
                 href={yahooUrl}
@@ -148,10 +144,7 @@ const AffiliateLink: React.FC<AffiliateLinkProps> = ({
                 rel="noopener noreferrer sponsored"
                 className="inline-flex items-center px-5 py-2.5 bg-[#FF0033] text-white rounded-md font-medium hover:bg-opacity-90 transition-colors"
               >
-                <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm3.248 8.585l-3.293 5.11 1.413 6.04h-2.4l-1.2-4.832-3.227 4.833H4.44l4.24-5.968-1.287-5.352h2.32l1.08 4.259 3.067-4.259h2.389v.17z" />
-                </svg>
-                Yahoo!で見る
+                Yahoo!
               </a>
             )}
           </div>

@@ -197,7 +197,7 @@ export default async function BlogPost({ params }: { params: PageParams }) {
                   )}
                 </div>
 
-                {/* アイキャッチ画像 - より大きく */}
+                {/* アイキャッチ画像 */}
                 {frontMatter.thumbnail && (
                   <div className="relative h-64 md:h-96 bg-[#e2ddd5] rounded-lg overflow-hidden mb-6">
                     <Image
@@ -210,16 +210,18 @@ export default async function BlogPost({ params }: { params: PageParams }) {
                   </div>
                 )}
 
-                {/* 執筆者情報 - よりリッチに */}
+                {/* 執筆者情報 */}
                 <div className="flex items-center p-4 bg-[#f9f7f5] rounded-md border border-[#e2ddd5]">
                   <div className="w-14 h-14 bg-[#d2c6b2] rounded-full mr-4 flex items-center justify-center text-[#2d2926] font-bold text-xl">
                     そ
                   </div>
                   <div className="flex-1">
                     <p className="font-medium text-[#2d2926] text-lg">そた</p>
+                    {/* TODO:Authorを変数として保持したい */}
                     <p className="text-sm text-[#6f4e37] mb-1">
                       ガジェットと暮らしをテーマに発信するブロガー
                     </p>
+                    {/* TODO:Authorを変数として保持したい */}
                     <div className="flex space-x-2">
                       <a
                         href="https://twitter.com/"
@@ -258,34 +260,38 @@ export default async function BlogPost({ params }: { params: PageParams }) {
                 </div>
               </header>
 
-              {/* 記事本文 - スタイル強化 */}
+              {/* 記事本文 */}
               <div className="p-6 md:p-8">
-                <div className="prose prose-lg max-w-none prose-headings:text-[#2d2926] prose-headings:font-bold prose-headings:border-b prose-headings:border-[#e2ddd5] prose-headings:pb-2 prose-headings:mb-4 prose-a:text-[#6f4e37] prose-a:decoration-[#d2c6b2] prose-a:decoration-2 prose-a:font-medium prose-blockquote:border-l-[#bd8c7d] prose-blockquote:bg-[#f9f7f5] prose-blockquote:py-1 prose-strong:text-[#6f4e37] prose-strong:font-bold prose-code:text-[#bd8c7d] prose-code:bg-[#f9f7f5] prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none">
+                <div className="prose prose-lg prose-h1:text-2xl lg:prose-h2:text-2xl prose-h2:text-xl lg:prose-h3:text-xl prose-h1:text-lg lg:prose-h1:text-3xl max-w-none prose-headings:text-[#2d2926] prose-headings:font-bold prose-headings:border-b prose-headings:border-[#e2ddd5] prose-headings:pb-2 prose-headings:mb-4 prose-a:text-[#6f4e37] prose-a:decoration-[#d2c6b2] prose-a:decoration-2 prose-a:font-medium prose-blockquote:border-l-[#bd8c7d] prose-blockquote:bg-[#f9f7f5] prose-blockquote:py-1 prose-strong:text-[#6f4e37] prose-strong:font-bold prose-code:text-[#bd8c7d] prose-code:bg-[#f9f7f5] prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none">
                   <MDXContent mdxSource={mdxSource} />
                 </div>
               </div>
 
-              {/* シェアボタン - デザイン改善 */}
+              {/* シェアボタン - X, Instagram, LINE, Mail */}
               <div className="px-6 md:px-8 pb-6 md:pb-8 pt-2 border-t border-[#e2ddd5]">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                   <p className="font-medium text-[#3c3732]">
                     この記事をシェア:
                   </p>
                   <div className="flex space-x-3">
+                    {/* X（旧Twitter） */}
                     <a
                       href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(frontMatter.title)}&url=${encodeURIComponent(`https://example.com/blog/${slug}`)}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-10 h-10 flex items-center justify-center bg-[#1DA1F2] text-white rounded-md hover:bg-opacity-90 transition-colors"
+                      className="w-10 h-10 flex items-center justify-center bg-[#000000] text-white rounded-md hover:bg-opacity-90 transition-colors"
+                      aria-label="Xで共有"
                     >
                       <svg
                         className="w-5 h-5"
                         fill="currentColor"
                         viewBox="0 0 24 24"
                       >
-                        <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+                        <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
                       </svg>
                     </a>
+
+                    {/* FaceBook */}
                     <a
                       href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`https://example.com/blog/${slug}`)}`}
                       target="_blank"
@@ -304,23 +310,29 @@ export default async function BlogPost({ params }: { params: PageParams }) {
                         />
                       </svg>
                     </a>
+
+                    {/* LINE */}
                     <a
                       href={`https://line.me/R/msg/text/?${encodeURIComponent(frontMatter.title)}%0D%0A${encodeURIComponent(`https://example.com/blog/${slug}`)}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-10 h-10 flex items-center justify-center bg-[#06C755] text-white rounded-md hover:bg-opacity-90 transition-colors"
+                      aria-label="LINEで送る"
                     >
                       <svg
                         className="w-5 h-5"
                         viewBox="0 0 24 24"
                         fill="currentColor"
                       >
-                        <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.433.596-.064.021-.13.031-.196.031-.211 0-.41-.101-.535-.275l-2.449-3.105v2.753c0 .346-.283.629-.63.629-.345 0-.627-.283-.627-.629V8.108c0-.272.174-.509.433-.595.064-.022.13-.032.193-.032.213 0 .413.098.537.272l2.449 3.104V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-5.741 0c0 .346-.282.629-.631.629-.345 0-.627-.283-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.283-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .346-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"></path>
+                        <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.433.596-.064.021-.13.031-.196.031-.211 0-.41-.101-.535-.275l-2.449-3.105v2.753c0 .346-.283.629-.63.629-.345 0-.627-.283-.627-.629V8.108c0-.272.174-.509.433-.595.064-.022.13-.032.193-.032.213 0 .413.098.537.272l2.449 3.104V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-5.741 0c0 .346-.282.629-.631.629-.345 0-.627-.283-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.283-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .346-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314" />
                       </svg>
                     </a>
+
+                    {/* Mail */}
                     <a
                       href={`mailto:?subject=${encodeURIComponent(frontMatter.title)}&body=${encodeURIComponent(`https://example.com/blog/${slug}`)}`}
                       className="w-10 h-10 flex items-center justify-center bg-[#6f4e37] text-white rounded-md hover:bg-opacity-90 transition-colors"
+                      aria-label="メールで共有"
                     >
                       <svg
                         className="w-5 h-5"
@@ -370,9 +382,19 @@ export default async function BlogPost({ params }: { params: PageParams }) {
                     >
                       <div className="card h-full flex flex-col">
                         <div className="relative h-40 bg-[#e2ddd5] flex items-center justify-center">
-                          <span className="text-[#6f4e37]">
-                            記事のサムネイル
-                          </span>
+                          {post.frontMatter.thumbnail ? (
+                            <img
+                              src={post.frontMatter.thumbnail}
+                              alt={post.frontMatter.title}
+                              className="w-full h-full object-cover"
+                            />
+                          ) : (
+                            <div className="w-full h-full flex items-center justify-center">
+                              <span className="text-[#6f4e37]">
+                                記事のサムネイル
+                              </span>
+                            </div>
+                          )}
                         </div>
                         <div className="p-4 flex-grow flex flex-col">
                           <h3 className="text-lg font-medium text-[#2d2926] group-hover:text-[#6f4e37] transition-colors duration-300 mb-2 line-clamp-2">
@@ -394,7 +416,7 @@ export default async function BlogPost({ params }: { params: PageParams }) {
             )}
           </div>
 
-          {/* サイドバー - 新規追加 */}
+          {/* サイドバー */}
           <div className="hidden lg:block">
             <div className="space-y-8 sticky top-24">
               {/* 目次 */}
