@@ -42,17 +42,29 @@ export default async function BlogPost({ params }: { params: PageParams }) {
   const viewCount = Math.floor(Math.random() * 100) + 10; // ダミーデータ
 
   // FIXME:見出しを抽出して目次を作成 (簡易的な方法)
+  type HeadingTag = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+
   const headings: { id: string; text: string; level: number }[] = [];
-  const regex = /^#+\s+(.+)$/gm;
+  const headingCounts: Record<HeadingTag, number> = {
+    h1: 1,
+    h2: 0,
+    h3: 0,
+    h4: 0,
+    h5: 0,
+    h6: 0,
+  };
+  const regex = /^(#+)\s+(.+)$/gm;
   let match;
+
   while ((match = regex.exec(content)) !== null) {
-    const line = match[0];
-    const level = line.indexOf(" ");
-    const text = line.slice(level).trim();
-    const id = text
-      .toLowerCase()
-      .replace(/[^\w\s]/gi, "")
-      .replace(/\s+/g, "-");
+    const hashes = match[1];
+    const level = hashes.length;
+    const text = match[2].trim();
+    const tagName = `h${level}` as HeadingTag;
+
+    headingCounts[tagName]++;
+    const id = `${tagName}-${headingCounts[tagName]}`;
+
     headings.push({ id, text, level });
   }
 
@@ -262,7 +274,7 @@ export default async function BlogPost({ params }: { params: PageParams }) {
 
               {/* 記事本文 */}
               <div className="p-6 md:p-8">
-                <div className="prose prose-lg prose-h1:text-2xl lg:prose-h2:text-2xl prose-h2:text-xl lg:prose-h3:text-xl prose-h1:text-lg lg:prose-h1:text-3xl max-w-none prose-headings:text-[#2d2926] prose-headings:font-bold prose-headings:border-b prose-headings:border-[#e2ddd5] prose-headings:pb-2 prose-headings:mb-4 prose-a:text-[#6f4e37] prose-a:decoration-[#d2c6b2] prose-a:decoration-2 prose-a:font-medium prose-blockquote:border-l-[#bd8c7d] prose-blockquote:bg-[#f9f7f5] prose-blockquote:py-1 prose-strong:text-[#6f4e37] prose-strong:font-bold prose-code:text-[#bd8c7d] prose-code:bg-[#f9f7f5] prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none">
+                <div className="prose prose-lg prose-h1:text-2xl md:prose-h1:text-3xl prose-h2:text-xl md:prose-h2:text-2xl prose-h3:text-lg md:prose-h3:text-xl max-w-none prose-headings:text-[#2d2926] prose-headings:font-bold prose-headings:border-b prose-headings:border-[#e2ddd5] prose-headings:pb-2 prose-headings:mb-4 prose-a:text-[#6f4e37] prose-a:decoration-[#d2c6b2] prose-a:decoration-2 prose-a:font-medium prose-blockquote:border-l-[#bd8c7d] prose-blockquote:bg-[#f9f7f5] prose-blockquote:py-1 prose-strong:text-[#6f4e37] prose-strong:font-bold prose-code:text-[#bd8c7d] prose-code:bg-[#f9f7f5] prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none">
                   <MDXContent mdxSource={mdxSource} />
                 </div>
               </div>
@@ -422,7 +434,7 @@ export default async function BlogPost({ params }: { params: PageParams }) {
               {/* 目次 */}
               {headings.length > 0 && (
                 <div className="bg-white p-6 rounded-xl shadow-sm border border-[#e2ddd5]">
-                  <h3 className="text-lg font-bold text-[#2d2926] mb-4 flex items-center">
+                  <h3 className="text-lg font-bold text-[#2d2926] mt-[-0.5rem] mb-4 flex items-center">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="h-5 w-5 mr-2 text-[#bd8c7d]"
@@ -472,7 +484,7 @@ export default async function BlogPost({ params }: { params: PageParams }) {
 
               {/* 人気記事 */}
               <div className="bg-white p-6 rounded-xl shadow-sm border border-[#e2ddd5]">
-                <h3 className="text-lg font-bold text-[#2d2926] mb-4 flex items-center">
+                <h3 className="text-lg font-bold text-[#2d2926] mt-[-0.5rem] mb-4 flex items-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-5 w-5 mr-2 text-[#bd8c7d]"
