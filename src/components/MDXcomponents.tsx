@@ -4,6 +4,7 @@ import React, { ReactNode } from "react";
 import AffiliateLink from "@/components/AffiliateLink";
 import Tweet from "@/components/Tweet";
 import Date from "@/components/Date";
+import YouTube from "@/components/Youtube";
 
 // Noteコンポーネント
 type NoteType = "info" | "warn" | "alert";
@@ -61,6 +62,20 @@ const Note: React.FC<NoteProps> = ({ children, type = "info" }) => {
   );
 };
 
+interface TableProps {
+  children: React.ReactNode;
+}
+
+const Table: React.FC<TableProps> = ({ children }) => {
+  return (
+    <div className="overflow-x-auto my-6">
+      <table className="min-w-full divide-y divide-gray-200">
+        {children}
+      </table>
+    </div>
+  );
+};
+
 // MDXコンポーネント
 const MDXComponents = {
   Image: (props: ImageProps) => {
@@ -69,8 +84,35 @@ const MDXComponents = {
   },
   AffiliateLink: AffiliateLink,
   Tweet: Tweet,
+  YouTube: YouTube,
   Date: Date,
   Note: Note,
+
+  table: (props: React.HTMLAttributes<HTMLTableElement>) => (
+    <table {...props} className="table-auto border-collapse w-full">
+    {props.children}
+    </table>
+    ),
+    thead: (props: React.HTMLAttributes<HTMLTableSectionElement>) => (
+    <thead {...props}>
+    {props.children}
+    </thead>
+    ),
+    th: (props: React.ThHTMLAttributes<HTMLTableHeaderCellElement>) => (
+    <th {...props} className="border px-4 py-2 bg-gray-200">
+    {props.children}
+    </th>
+    ),
+    tr: (props: React.HTMLAttributes<HTMLTableRowElement>) => (
+    <tr {...props}>
+    {props.children}
+    </tr>
+    ),
+    td: (props: React.TdHTMLAttributes<HTMLTableDataCellElement>) => (
+    <td {...props} className="border px-4 py-2">
+    {props.children}
+    </td>
+    ),
   
   // カスタムラッパー
   wrapper: ({ children }: { children: ReactNode }) => {
