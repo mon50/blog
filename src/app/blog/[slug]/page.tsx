@@ -103,12 +103,20 @@ export default async function BlogPost({ params }: { params: PageParams }) {
               <header className="p-6 md:p-8 border-b border-[#e2ddd5]">
                 {/* カテゴリ表示 */}
                 {frontMatter.category && (
-                  <div className="mb-4">
+                  <div className="flex flex-wrap mb-4">
                     <Link
                       href={`/category/${frontMatter.category}`}
-                      className="inline-block bg-[#6f4e37] text-white px-4 py-1 rounded-full text-sm font-medium hover:bg-[#5a3e2c] transition-colors"
+                      className="flex flex-row items-center bg-[#6f4e37] text-white px-4 py-1 rounded-full text-sm font-medium hover:bg-[#5a3e2c] transition-colors"
                     >
-                      {frontMatter.category}
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-4 w-4 mr-2"
+                        fill="currentColor"
+                        viewBox="0 0 512 512"
+                      >
+                        <path d="M64 480H448c35.3 0 64-28.7 64-64V160c0-35.3-28.7-64-64-64H288c-10.1 0-19.6-4.7-25.6-12.8L243.2 57.6C231.1 41.5 212.1 32 192 32H64C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64z" />
+                      </svg>
+                      <p>{frontMatter.category}</p>
                     </Link>
                   </div>
                 )}
@@ -124,9 +132,17 @@ export default async function BlogPost({ params }: { params: PageParams }) {
                     <Link
                       href={`/tag/${tag}`}
                       key={tag}
-                      className="mr-2 mb-2 px-3 py-1 bg-[#f1eeea] text-[#6f4e37] text-sm rounded-md hover:bg-[#e2ddd5] transition-colors"
+                      className="flex flex-row items-center mr-2 mb-2 px-3 py-1 bg-[#f1eeea] text-[#6f4e37] text-sm rounded-md hover:bg-[#e2ddd5] transition-colors"
                     >
-                      {tag}
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-4 w-4 mr-2"
+                        fill="currentColor"
+                        viewBox="0 0 512 512"
+                      >
+                        <path d="M345 39.1L472.8 168.4c52.4 53 52.4 138.2 0 191.2L360.8 472.9c-9.3 9.4-24.5 9.5-33.9 .2s-9.5-24.5-.2-33.9L438.6 325.9c33.9-34.3 33.9-89.4 0-123.7L310.9 72.9c-9.3-9.4-9.2-24.6 .2-33.9s24.6-9.2 33.9 .2zM0 229.5L0 80C0 53.5 21.5 32 48 32l149.5 0c17 0 33.3 6.7 45.3 18.7l168 168c25 25 25 65.5 0 90.5L277.3 442.7c-25 25-65.5 25-90.5 0l-168-168C6.7 262.7 0 246.5 0 229.5zM144 144a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z" />
+                      </svg>
+                      <p>{tag}</p>
                     </Link>
                   ))}
                 </div>
