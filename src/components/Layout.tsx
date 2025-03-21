@@ -18,7 +18,7 @@ export default function Layout({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
-  // スクロール検出 - パフォーマンス最適化
+  // スクロール検出
   useEffect(() => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 10;
@@ -210,9 +210,9 @@ export default function Layout({
             </div>
           </div>
 
-          {/* PC用検索バー - クリックで表示/非表示 */}
+          {/* PC用検索バー */}
           <div
-            className={`pt-2 pb-4 hidden md:block transition-all duration-500 ease-in-out overflow-hidden ${searchExpanded ? "h-16 opacity-100" : "h-0 opacity-0"}`}
+            className={`hidden md:block transition-all duration-500 ease-in-out overflow-hidden ${searchExpanded ? "h-16 opacity-100" : "h-0 opacity-0"}`}
           >
             <div className="transform-gpu will-change-transform animate-slideDown">
               <SearchBar />
@@ -220,7 +220,7 @@ export default function Layout({
           </div>
         </div>
 
-        {/* モバイルメニュー - 改良版 */}
+        {/* モバイルメニュー */}
         <div
           className={`md:hidden overflow-hidden ${mobileMenuOpen ? "block" : "hidden h-0"}`}
         >
