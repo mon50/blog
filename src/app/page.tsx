@@ -18,7 +18,7 @@ export default async function Home() {
   return (
     <Layout heroMode={true}>
       <div className="space-y-12">
-        {/* ヒーローセクション - 改良版 */}
+        {/* ヒーローセクション */}
         <section className="hero-section">
           <div className="hero-content">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white leading-tight animate-slideInLeft">
@@ -67,12 +67,22 @@ export default async function Home() {
               注目の記事
             </h2>
             <Link href={`/blog/${featuredPost.slug}`} className="block group">
-              <div className="card md:flex">
-                <div className="md:w-1/2 relative overflow-hidden" style={{ aspectRatio: '3/2' }}>
-                  {/* プレースホルダー画像 - 実際の記事画像に置き換える */}
-                  <div className="absolute inset-0 bg-[#e2ddd5] flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
-                    <span className="text-[#6f4e37]">記事のサムネイル画像</span>
-                  </div>
+              <div className="card overflow-hidden transition-transform duration-500 group-hover:scale-105 md:flex">
+                <div
+                  className="md:w-1/2 relative"
+                  style={{ aspectRatio: "3/2" }}
+                >
+                  {featuredPost.frontMatter.thumbnail ? (
+                    <img
+                      src={featuredPost.frontMatter.thumbnail}
+                      alt={featuredPost.frontMatter.title}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <span className="text-[#6f4e37]">記事のサムネイル</span>
+                    </div>
+                  )}
                 </div>
                 <div className="p-6 md:w-1/2">
                   <div className="flex flex-wrap mb-3">
@@ -150,7 +160,10 @@ export default async function Home() {
               >
                 <div className="card overflow-hidden hover:shadow-lg transition-all duration-500 transform-gpu hover:-translate-y-1">
                   <div className="relative">
-                    <div className="relative bg-[#e2ddd5] overflow-hidden" style={{ aspectRatio: '3/2' }}>
+                    <div
+                      className="relative bg-[#e2ddd5] overflow-hidden"
+                      style={{ aspectRatio: "3/2" }}
+                    >
                       {post.frontMatter.thumbnail ? (
                         <img
                           src={post.frontMatter.thumbnail}
@@ -257,10 +270,21 @@ export default async function Home() {
                 className="block group animate-scale delay-300"
               >
                 <div className="card h-full flex flex-col overflow-hidden hover:shadow-lg transition-all duration-500 transform-gpu hover:-translate-y-1">
-                  <div className="relative bg-[#e2ddd5] flex items-center justify-center overflow-hidden" style={{ aspectRatio: '3/2' }}>
-                    <div className="w-full h-full flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
-                      <span className="text-[#6f4e37]">記事のサムネイル</span>
-                    </div>
+                  <div
+                    className="relative bg-[#e2ddd5] flex items-center justify-center overflow-hidden"
+                    style={{ aspectRatio: "3/2" }}
+                  >
+                    {post.frontMatter.thumbnail ? (
+                      <img
+                        src={post.frontMatter.thumbnail}
+                        alt={post.frontMatter.title}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
+                        <span className="text-[#6f4e37]">記事のサムネイル</span>
+                      </div>
+                    )}
                   </div>
                   <div className="p-5 flex-grow flex flex-col">
                     <div className="flex flex-wrap mb-2">

@@ -354,7 +354,7 @@ export default function Layout({
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
-              <h3 className="text-lg font-semibold mb-4">Gadget Blog</h3>
+              <h3 className="text-lg text-gray-100 font-semibold mb-4">Gadget Blog</h3>
               <p className="text-gray-300 mb-4">
                 最新のガジェット情報、レビュー、比較をお届けするブログです。
               </p>
@@ -394,7 +394,7 @@ export default function Layout({
               </div>
             </div>
             <div>
-              <h3 className="text-lg font-semibold mb-4">カテゴリー</h3>
+              <h3 className="text-lg text-gray-100 font-semibold mb-4">カテゴリー</h3>
               <ul className="space-y-2">
                 <li>
                   <Link
@@ -431,7 +431,7 @@ export default function Layout({
               </ul>
             </div>
             <div>
-              <h3 className="text-lg font-semibold mb-4">サイト情報</h3>
+              <h3 className="text-lg text-gray-100 font-semibold mb-4">サイト情報</h3>
               <ul className="space-y-2">
                 <li>
                   <Link

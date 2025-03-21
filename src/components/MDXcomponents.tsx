@@ -66,29 +66,26 @@ const Note: React.FC<NoteProps> = ({ children, type = "info" }) => {
 // MDXコンポーネント
 const MDXComponents = {
   Image: (props: ImageProps) => {
-    const { alt = "", style, className, ...rest } = props;
-    // width/heightが指定されていない場合は、aspectRatio: '3/2'のスタイルを追加
-    const hasExplicitDimensions = typeof props.width === 'number' && typeof props.height === 'number';
+    const { alt = "", style, className, width, height, ...rest } = props;
+    // 全ての画像のアスペクト比を3:2に統一
+    const containerStyle = { 
+      ...style, 
+      aspectRatio: '3/2', 
+      position: 'relative' as const, 
+      display: 'block',
+      marginBottom: '2rem',
+    };
     
-    const containerStyle = !hasExplicitDimensions ? 
-      { ...style, aspectRatio: '3/2', position: 'relative' as const, display: 'block' } : 
-      style;
-    
-    // スタイルに基づいて画像を表示
-    if (!hasExplicitDimensions) {
-      return (
-        <div style={containerStyle} className={className}>
-          <Image 
-            alt={alt} 
-            fill
-            className="object-cover"
-            {...rest} 
-          />
-        </div>
-      );
-    }
-    
-    return <Image alt={alt} className={className} style={style} {...rest} />;
+    return (
+      <div style={containerStyle} className={className}>
+        <Image 
+          alt={alt} 
+          fill
+          className="object-cover"
+          {...rest} 
+        />
+      </div>
+    );
   },
   AffiliateLink: AffiliateLink,
   Tweet: Tweet,

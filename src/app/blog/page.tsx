@@ -42,9 +42,22 @@ export default async function BlogPage() {
               className="card hover:shadow-md transition-shadow"
             >
               <Link href={`/blog/${post.slug}`} className="block group">
-                <div className="md:flex">
-                  <div className="md:w-1/3 relative h-48 md:h-auto bg-[#e2ddd5] flex items-center justify-center">
-                    <span className="text-[#6f4e37]">記事のサムネイル</span>
+                <div className="overflow-hidden relative md:flex">
+                  <div
+                    className="md:w-1/3 relative bg-[#e2ddd5] overflow-hidden"
+                    style={{ aspectRatio: "3/2" }}
+                  >
+                    {post.frontMatter.thumbnail ? (
+                      <img
+                        src={post.frontMatter.thumbnail}
+                        alt={post.frontMatter.title}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
+                        <span className="text-[#6f4e37]">記事のサムネイル</span>
+                      </div>
+                    )}
                   </div>
                   <div className="p-6 md:p-8 md:w-2/3">
                     <div className="flex flex-wrap mb-3">

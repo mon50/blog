@@ -227,7 +227,10 @@ export default async function BlogPost({ params }: { params: PageParams }) {
 
                 {/* アイキャッチ画像 */}
                 {frontMatter.thumbnail && (
-                  <div className="relative bg-[#e2ddd5] rounded-lg overflow-hidden mb-6" style={{ aspectRatio: '3/2' }}>
+                  <div
+                    className="relative bg-[#e2ddd5] rounded-lg overflow-hidden mb-6"
+                    style={{ aspectRatio: "3/2" }}
+                  >
                     <Image
                       src={frontMatter.thumbnail}
                       alt={frontMatter.title || "記事のサムネイル"}
@@ -408,8 +411,11 @@ export default async function BlogPost({ params }: { params: PageParams }) {
                       key={post.slug}
                       className="block group"
                     >
-                      <div className="card h-full flex flex-col">
-                        <div className="relative bg-[#e2ddd5] flex items-center justify-center" style={{ aspectRatio: '3/2' }}>
+                      <div className="card overflow-hidden h-full flex flex-col">
+                        <div
+                          className="relative bg-[#e2ddd5] flex items-center justify-center"
+                          style={{ aspectRatio: "3/2" }}
+                        >
                           {post.frontMatter.thumbnail ? (
                             <img
                               src={post.frontMatter.thumbnail}
@@ -564,13 +570,17 @@ export default async function BlogPost({ params }: { params: PageParams }) {
                   当ブログのコンテンツを気に入っていただけましたら、サポートいただけるとうれしいです。
                 </p>
                 <a
-      href="https://www.buymeacoffee.com"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="inline-flex items-center justify-center bg-[#FFDD00] text-[#2d2926] px-4 py-2 rounded-md font-medium hover:bg-opacity-90 transition-colors w-full"
-    >
-      <img src="/icons/bmc-button.svg" alt="Buy Me a Coffee" className="h-10 w-full" />
-    </a>
+                  href="https://www.buymeacoffee.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center bg-[#FFDD00] text-[#2d2926] px-4 py-2 rounded-md font-medium hover:bg-opacity-90 transition-colors w-full"
+                >
+                  <img
+                    src="/icons/bmc-button.svg"
+                    alt="Buy Me a Coffee"
+                    className="h-10 w-full"
+                  />
+                </a>
               </div>
             </div>
           </div>
