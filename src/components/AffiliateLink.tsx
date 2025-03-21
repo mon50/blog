@@ -97,9 +97,9 @@ const AffiliateLink: React.FC<AffiliateLinkProps> = ({
         <span className="font-medium text-[#2d2926]">商品紹介</span>
       </div>
       <div className="md:flex">
-        <div className="md:w-1/3 relative h-64 md:h-auto bg-[#f1eeea] flex items-center justify-center">
+        <div className="md:w-1/3 relative bg-[#f1eeea] flex items-center justify-center" style={{ aspectRatio: '3/2' }}>
           {imageUrl ? (
-            <div className="relative w-full h-64 md:h-full">
+            <div className="relative w-full h-full" style={{ aspectRatio: '3/2' }}>
               <Image
                 src={imageUrl}
                 alt={title}

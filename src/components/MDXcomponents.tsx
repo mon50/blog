@@ -49,7 +49,7 @@ const Note: React.FC<NoteProps> = ({ children, type = "info" }) => {
     },
   };
 
-  const { containerClass, iconClass, icon, title } = styles[type];
+  const { containerClass, icon, title } = styles[type];
 
   return (
     <div className={`p-4 mb-6 rounded-lg border-l-4 ${containerClass}`}>
@@ -66,8 +66,29 @@ const Note: React.FC<NoteProps> = ({ children, type = "info" }) => {
 // MDXコンポーネント
 const MDXComponents = {
   Image: (props: ImageProps) => {
-    const { alt = "", ...rest } = props;
-    return <Image alt={alt} {...rest} />;
+    const { alt = "", style, className, ...rest } = props;
+    // width/heightが指定されていない場合は、aspectRatio: '3/2'のスタイルを追加
+    const hasExplicitDimensions = typeof props.width === 'number' && typeof props.height === 'number';
+    
+    const containerStyle = !hasExplicitDimensions ? 
+      { ...style, aspectRatio: '3/2', position: 'relative' as const, display: 'block' } : 
+      style;
+    
+    // スタイルに基づいて画像を表示
+    if (!hasExplicitDimensions) {
+      return (
+        <div style={containerStyle} className={className}>
+          <Image 
+            alt={alt} 
+            fill
+            className="object-cover"
+            {...rest} 
+          />
+        </div>
+      );
+    }
+    
+    return <Image alt={alt} className={className} style={style} {...rest} />;
   },
   AffiliateLink: AffiliateLink,
   Tweet: Tweet,

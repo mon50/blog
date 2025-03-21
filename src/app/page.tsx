@@ -68,7 +68,7 @@ export default async function Home() {
             </h2>
             <Link href={`/blog/${featuredPost.slug}`} className="block group">
               <div className="card md:flex">
-                <div className="md:w-1/2 relative h-64 md:h-auto overflow-hidden">
+                <div className="md:w-1/2 relative overflow-hidden" style={{ aspectRatio: '3/2' }}>
                   {/* プレースホルダー画像 - 実際の記事画像に置き換える */}
                   <div className="absolute inset-0 bg-[#e2ddd5] flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
                     <span className="text-[#6f4e37]">記事のサムネイル画像</span>
@@ -150,7 +150,7 @@ export default async function Home() {
               >
                 <div className="card overflow-hidden hover:shadow-lg transition-all duration-500 transform-gpu hover:-translate-y-1">
                   <div className="relative">
-                    <div className="relative h-48 bg-[#e2ddd5] overflow-hidden">
+                    <div className="relative bg-[#e2ddd5] overflow-hidden" style={{ aspectRatio: '3/2' }}>
                       {post.frontMatter.thumbnail ? (
                         <img
                           src={post.frontMatter.thumbnail}
@@ -257,7 +257,7 @@ export default async function Home() {
                 className="block group animate-scale delay-300"
               >
                 <div className="card h-full flex flex-col overflow-hidden hover:shadow-lg transition-all duration-500 transform-gpu hover:-translate-y-1">
-                  <div className="relative h-48 bg-[#e2ddd5] flex items-center justify-center overflow-hidden">
+                  <div className="relative bg-[#e2ddd5] flex items-center justify-center overflow-hidden" style={{ aspectRatio: '3/2' }}>
                     <div className="w-full h-full flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
                       <span className="text-[#6f4e37]">記事のサムネイル</span>
                     </div>

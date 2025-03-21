@@ -227,7 +227,7 @@ export default async function BlogPost({ params }: { params: PageParams }) {
 
                 {/* アイキャッチ画像 */}
                 {frontMatter.thumbnail && (
-                  <div className="relative h-64 md:h-96 bg-[#e2ddd5] rounded-lg overflow-hidden mb-6">
+                  <div className="relative bg-[#e2ddd5] rounded-lg overflow-hidden mb-6" style={{ aspectRatio: '3/2' }}>
                     <Image
                       src={frontMatter.thumbnail}
                       alt={frontMatter.title || "記事のサムネイル"}
@@ -409,7 +409,7 @@ export default async function BlogPost({ params }: { params: PageParams }) {
                       className="block group"
                     >
                       <div className="card h-full flex flex-col">
-                        <div className="relative h-40 bg-[#e2ddd5] flex items-center justify-center">
+                        <div className="relative bg-[#e2ddd5] flex items-center justify-center" style={{ aspectRatio: '3/2' }}>
                           {post.frontMatter.thumbnail ? (
                             <img
                               src={post.frontMatter.thumbnail}
