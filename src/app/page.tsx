@@ -19,17 +19,17 @@ export default async function Home() {
     <Layout heroMode={true}>
       <div className="space-y-12">
         {/* ヒーローセクション */}
-        <section className="hero-section">
+        <section className="hero-section relative left-1/2 w-dvw max-w-none -translate-x-1/2">
           <div className="hero-content">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white leading-tight animate-slideInLeft">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white">
               シックな雰囲気の中で
               <br />
               楽しむガジェット情報
             </h1>
-            <p className="text-xl text-gray-100 mb-8 max-w-lg animate-slideInLeft delay-200">
+            <p className="text-xl text-gray-100 mb-8 max-w-lg">
               最新のガジェット情報やレビューを、カフェのような落ち着いた雰囲気でお届けします。
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 animate-slideInLeft delay-300">
+            <div className="flex flex-col sm:flex-row gap-4">
               <Link
                 href="/tag/featured"
                 className="btn-secondary inline-block text-center"

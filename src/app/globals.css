@@ -210,19 +210,18 @@ html {
 .hero-section {
   position: relative;
   background-color: #2d2926;
-  background-image: url("/images/hero-bg.jpg"); /* 適切な背景画像を用意 */
+  background-image: url("/images/sample-bg.png");
   background-size: cover;
   background-position: center;
   color: white;
-  padding: 6rem 0 4rem;
-  margin-top: -4rem; /* ヘッダーとの統合用 */
-  border-radius: 0 0 1rem 1rem;
+  padding: 6rem 0 0rem;
+  margin-top: -4rem;
   overflow: hidden;
   height: 90vh;
   max-height: 700px;
   display: flex;
   align-items: center;
-  transition: all 0.5s ease-in-out;
+  /* transition: all 0.5s ease-in-out; */
 }
 
 .hero-section::before {
