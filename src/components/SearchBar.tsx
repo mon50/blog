@@ -30,7 +30,9 @@ const SearchBar: React.FC = () => {
 
       setIsSearching(true);
       try {
-        const response = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
+        const response = await fetch(
+          `/api/search?q=${encodeURIComponent(query)}`,
+        );
         if (!response.ok) throw new Error("検索に失敗しました");
         const data = await response.json();
         setResults(data);
@@ -47,7 +49,10 @@ const SearchBar: React.FC = () => {
   // 検索結果の外側をクリックしたら結果を閉じる
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
+      if (
+        searchRef.current &&
+        !searchRef.current.contains(event.target as Node)
+      ) {
         setShowResults(false);
       }
     };
@@ -80,7 +85,7 @@ const SearchBar: React.FC = () => {
             }}
             onFocus={() => setShowResults(true)}
             placeholder="記事を検索..."
-            className="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none"
           />
           <div className="absolute left-3 top-2.5 text-gray-400">
             <svg

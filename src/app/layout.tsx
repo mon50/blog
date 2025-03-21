@@ -1,12 +1,24 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Inter, M_PLUS_Rounded_1c } from "next/font/google";
 import "./globals.css";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
+// 丸ゴシック体（カフェっぽい雰囲気に合う）
+const mplusRounded = M_PLUS_Rounded_1c({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "700"],
+  variable: "--font-mplus-rounded",
+  display: "swap",
 });
+
+// サブフォント
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+// モノスペースフォント
 const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
@@ -24,9 +36,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ja" className="scroll-smooth">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${mplusRounded.variable} ${inter.variable} ${geistMono.variable} antialiased`}
       >
         {children}
       </body>

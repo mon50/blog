@@ -3,13 +3,14 @@
 @tailwind utilities;
 
 :root {
-  /* シックなカフェのような雰囲気のカラースキーム */
+  /* リッチなカフェのような雰囲気のカラースキーム（落ち着いた色合い）*/
   --background: #ffffff;
   --foreground: #2d2926; /* ダークブラウン */
-  --primary: #6f4e37; /* コーヒーブラウン */
+  --primary: #7d5a46; /* リッチコーヒーブラウン - 少し深く */
   --primary-dark: #5a3e2c;
   --secondary: #d2c6b2; /* クリームベージュ */
   --accent: #bd8c7d; /* ソフトモカ */
+  --header-bg: #f5f1eb; /* ヘッダー背景色 - 温かみのあるベージュ */
   --neutral-50: #f9f7f5;
   --neutral-100: #f1eeea;
   --neutral-200: #e2ddd5;
@@ -21,25 +22,227 @@
 body {
   color: var(--foreground);
   background: var(--neutral-50);
-  font-family: var(--font-geist-sans), sans-serif;
+  font-family: var(--font-mplus-rounded), var(--font-inter), sans-serif;
 }
 
 /* カスタムスタイル */
 .btn-primary {
-  @apply bg-[#6f4e37] hover:bg-[#5a3e2c] text-white font-medium px-4 py-2 rounded-md transition-colors;
+  @apply bg-[#7d5a46] hover:bg-[#6a4c3b] text-white font-medium px-4 py-2 rounded-full transition-colors;
 }
 
 .btn-secondary {
-  @apply bg-[#d2c6b2] hover:bg-[#c2b5a0] text-[#2d2926] font-medium px-4 py-2 rounded-md transition-colors;
+  @apply bg-[#d2c6b2] hover:bg-[#c2b5a0] text-[#2d2926] font-medium px-4 py-2 rounded-full transition-colors;
 }
 
 .card {
-  @apply bg-white border border-[#e2ddd5] rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300;
+  @apply bg-white border border-[#e2ddd5] rounded-xl shadow-sm hover:shadow-md transition-all duration-500 will-change-transform;
 }
 
-/* 美術館のようなタイポグラフィ */
-h1, h2, h3, h4, h5, h6 {
+/* カフェスタイルのタイポグラフィ */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   @apply font-medium tracking-tight;
+}
+
+h1 {
+  @apply text-3xl md:text-4xl lg:text-5xl font-bold text-[#2d2926] mb-8 leading-tight;
+}
+
+h2 {
+  @apply text-2xl md:text-3xl font-bold text-[#2d2926] mb-6 mt-2 pb-3 border-b border-[#e2ddd5];
+}
+
+h3 {
+  @apply text-xl md:text-2xl font-semibold text-[#3c3732] mb-4 mt-4;
+}
+
+/* 目次のリンクがスムーズにスクロールするようにする */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 2rem;
+}
+
+/* 目次がクリックされたときのハイライト効果 */
+:target {
+  animation: highlight 2s ease;
+}
+
+/* アニメーション */
+@keyframes highlight {
+  from {
+    background-color: rgba(189, 140, 125, 0.2);
+  }
+  to {
+    background-color: transparent;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes growWidth {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 100%;
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* アニメーションクラス */
+.animate-fadeIn {
+  animation: fadeIn 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.animate-slideDown {
+  animation: slideDown 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.animate-growWidth {
+  animation: growWidth 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.animate-slideUp {
+  animation: slideUp 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.animate-slideInRight {
+  animation: slideInRight 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.animate-slideInLeft {
+  animation: slideInLeft 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.animate-scale {
+  animation: scale 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* スタガード（遅延）アニメーション用クラス */
+.delay-100 {
+  animation-delay: 100ms;
+}
+
+.delay-200 {
+  animation-delay: 200ms;
+}
+
+.delay-300 {
+  animation-delay: 300ms;
+}
+
+.delay-400 {
+  animation-delay: 400ms;
+}
+
+.delay-500 {
+  animation-delay: 500ms;
+}
+
+/* ヒーローセクションのカスタマイズ */
+.hero-section {
+  position: relative;
+  background-color: #2d2926;
+  background-image: url("/images/sample-bg.png");
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding: 6rem 0 0rem;
+  margin-top: -4rem;
+  overflow: hidden;
+  height: 90vh;
+  max-height: 700px;
+  display: flex;
+  align-items: center;
+  /* transition: all 0.5s ease-in-out; */
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to right,
+    rgba(45, 41, 38, 0.8),
+    rgba(45, 41, 38, 0.4)
+  );
+}
+
+.hero-content {
+  position: relative;
+  z-index: 10;
+  max-width: 600px;
+  padding: 0 2rem;
 }
 
 @layer utilities {

@@ -3,21 +3,26 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --hostname 0.0.0.0",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
     "@next/mdx": "^15.2.2",
+    "@tailwindcss/line-clamp": "^0.4.4",
     "@tailwindcss/typography": "^0.5.16",
     "date-fns": "^4.1.0",
     "gray-matter": "^4.0.3",
     "next": "14.2.24",
     "next-mdx-remote": "^5.0.0",
+    "prettier": "^3.5.3",
     "react": "^18",
     "react-dom": "^18",
-    "rehype-highlight": "^7.0.2"
+    "react-markdown": "^10.1.0",
+    "rehype-highlight": "^7.0.2",
+    "rehype-raw": "^7.0.0",
+    "remark-gfm": "^4.0.1"
   },
   "devDependencies": {
     "@types/node": "^20",

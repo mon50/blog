@@ -54,7 +54,7 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: ["var(--font-geist-sans)", "sans-serif"],
+        sans: ["var(--font-mplus-rounded)", "var(--font-inter)", "sans-serif"],
         mono: ["var(--font-geist-mono)", "monospace"],
       },
       typography: {

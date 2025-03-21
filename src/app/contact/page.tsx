@@ -15,7 +15,11 @@ export default function ContactPage() {
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState("");
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
+  ) => {
     const { name, value } = e.target;
     setFormState((prev) => ({
       ...prev,
@@ -31,12 +35,12 @@ export default function ContactPage() {
 
     // ここに実際のフォーム送信処理を記述
     // 例: APIエンドポイントへのPOSTリクエスト
-    
+
     // ダミーの送信処理（成功を模擬）
     try {
       // 送信を模擬するための遅延
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+
       // 成功したとみなす
       setSubmitSuccess(true);
       setFormState({
@@ -47,7 +51,9 @@ export default function ContactPage() {
       });
     } catch {
       // エラーが発生した場合の処理
-      setSubmitError("送信中にエラーが発生しました。後ほど再度お試しください。");
+      setSubmitError(
+        "送信中にエラーが発生しました。後ほど再度お試しください。",
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -72,14 +78,27 @@ export default function ContactPage() {
             <div className="bg-green-50 border border-green-200 rounded-md p-4 mb-6">
               <div className="flex">
                 <div className="flex-shrink-0">
-                  <svg className="h-5 w-5 text-green-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  <svg
+                    className="h-5 w-5 text-green-600"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clipRule="evenodd"
+                    />
                   </svg>
                 </div>
                 <div className="ml-3">
-                  <h3 className="text-sm font-medium text-green-800">送信完了</h3>
+                  <h3 className="text-sm font-medium text-green-800">
+                    送信完了
+                  </h3>
                   <div className="mt-2 text-sm text-green-700">
-                    <p>お問い合わせありがとうございます。内容を確認後、ご返信いたします。</p>
+                    <p>
+                      お問い合わせありがとうございます。内容を確認後、ご返信いたします。
+                    </p>
                   </div>
                 </div>
               </div>
@@ -90,12 +109,23 @@ export default function ContactPage() {
                 <div className="bg-red-50 border border-red-200 rounded-md p-4 mb-6">
                   <div className="flex">
                     <div className="flex-shrink-0">
-                      <svg className="h-5 w-5 text-red-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                      <svg
+                        className="h-5 w-5 text-red-600"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                          clipRule="evenodd"
+                        />
                       </svg>
                     </div>
                     <div className="ml-3">
-                      <h3 className="text-sm font-medium text-red-800">エラー</h3>
+                      <h3 className="text-sm font-medium text-red-800">
+                        エラー
+                      </h3>
                       <div className="mt-2 text-sm text-red-700">
                         <p>{submitError}</p>
                       </div>
@@ -106,7 +136,10 @@ export default function ContactPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-[#3c3732] mb-1">
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-medium text-[#3c3732] mb-1"
+                  >
                     お名前 <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -121,7 +154,10 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-[#3c3732] mb-1">
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-[#3c3732] mb-1"
+                  >
                     メールアドレス <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -137,7 +173,10 @@ export default function ContactPage() {
               </div>
 
               <div>
-                <label htmlFor="subject" className="block text-sm font-medium text-[#3c3732] mb-1">
+                <label
+                  htmlFor="subject"
+                  className="block text-sm font-medium text-[#3c3732] mb-1"
+                >
                   件名 <span className="text-red-500">*</span>
                 </label>
                 <select
@@ -157,7 +196,10 @@ export default function ContactPage() {
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-[#3c3732] mb-1">
+                <label
+                  htmlFor="message"
+                  className="block text-sm font-medium text-[#3c3732] mb-1"
+                >
                   メッセージ本文 <span className="text-red-500">*</span>
                 </label>
                 <textarea
@@ -172,25 +214,49 @@ export default function ContactPage() {
               </div>
 
               <div className="text-sm text-[#6f4e37] bg-[#f9f7f5] p-4 rounded-md">
-                <p>※ 送信いただいた内容に関しては、返信およびお問い合わせ対応以外の目的には使用いたしません。</p>
-                <p>※ 返信まで2〜3営業日いただく場合がございますので、ご了承ください。</p>
+                <p>
+                  ※
+                  送信いただいた内容に関しては、返信およびお問い合わせ対応以外の目的には使用いたしません。
+                </p>
+                <p>
+                  ※
+                  返信まで2〜3営業日いただく場合がございますので、ご了承ください。
+                </p>
               </div>
 
               <div>
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className={`w-full py-3 px-4 bg-[#6f4e37] text-white font-medium rounded-md hover:bg-[#5a3e2c] transition-colors ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
+                  className={`w-full py-3 px-4 bg-[#6f4e37] text-white font-medium rounded-md hover:bg-[#5a3e2c] transition-colors ${isSubmitting ? "opacity-70 cursor-not-allowed" : ""}`}
                 >
                   {isSubmitting ? (
                     <span className="flex items-center justify-center">
-                      <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      <svg
+                        className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        ></circle>
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                        ></path>
                       </svg>
                       送信中...
                     </span>
-                  ) : '送信する'}
+                  ) : (
+                    "送信する"
+                  )}
                 </button>
               </div>
             </form>

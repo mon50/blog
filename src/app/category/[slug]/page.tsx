@@ -11,42 +11,39 @@ export default async function CategoryPage({
   params: { slug: string };
 }) {
   const { slug } = params;
-  const posts = await getPostsByCategory(slug);
 
-  // カテゴリー情報を定義
   const categories = {
-    smartphone: {
-      title: "スマートフォン",
-      description: "最新のスマートフォンのレビュー、比較、使い方などの情報を紹介します。",
+    gadget: {
+      title: "ガジェット",
+      description:
+        "",
       icon: "📱",
     },
-    audio: {
-      title: "オーディオ",
-      description: "イヤホン、ヘッドホン、スピーカーなどのオーディオ機器に関する情報を紹介します。",
-      icon: "🎧",
+    furniture: {
+      title: "家具",
+      description:
+        "",
+      icon: "🪑",
     },
-    pc: {
-      title: "PC・周辺機器",
-      description: "パソコン本体やキーボード、マウスなどの周辺機器に関する情報を紹介します。",
-      icon: "💻",
+    travel: {
+      title: "旅行",
+      description:
+        "",
+      icon: "🏖️",
     },
-    smartwatch: {
-      title: "スマートウォッチ",
-      description: "スマートウォッチやフィットネストラッカーなどのウェアラブルデバイスを紹介します。",
-      icon: "⌚",
-    },
-    featured: {
-      title: "注目の記事",
-      description: "編集部が厳選したおすすめの記事を紹介します。",
-      icon: "✨",
+    chat: {
+      title: "雑談",
+      description:
+        "",
+      icon: "🚀",
     },
   };
 
-  // 有効なカテゴリーか確認
-  if (!categories[slug as keyof typeof categories]) {
+  if (!(slug in categories)) {
     notFound();
   }
 
+  const posts = await getPostsByCategory(categories[slug as keyof typeof categories].title);
   const category = categories[slug as keyof typeof categories];
 
   return (
@@ -94,7 +91,7 @@ export default async function CategoryPage({
                       {post.frontMatter.title}
                     </h3>
                     <time className="text-sm text-gray-600 mb-3 block">
-                      {format(parseISO(post.frontMatter.date), "yyyy年MM月dd日", {
+                      {format(parseISO(post.frontMatter.date), "yyyy/MM/dd", {
                         locale: ja,
                       })}
                     </time>
