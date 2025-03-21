@@ -12,7 +12,7 @@ const postsDirectory = path.join(process.cwd(), "src/content/posts");
 const viewCounts: Record<string, number> = {};
 
 export function getPostSlugs() {
-  return fs.readdirSync(postsDirectory).filter(file => file.endsWith('.mdx'));
+  return fs.readdirSync(postsDirectory).filter((file) => file.endsWith(".mdx"));
 }
 
 export function getPostBySlug(slug: string) {
@@ -25,17 +25,17 @@ export function getPostBySlug(slug: string) {
 
   // サムネイル画像がない場合はデフォルト画像を設定
   if (!data.thumbnail) {
-    data.thumbnail = '/images/default-thumbnail.jpg';
+    data.thumbnail = "/images/default-thumbnail.jpg";
   }
 
   // 記事の要約がない場合は本文から自動抽出（最初の100文字程度）
   if (!data.excerpt) {
     const textContent = content
-      .replace(/```[\s\S]*?```/g, '') // コードブロックを削除
-      .replace(/import[\s\S]*?;/g, '') // importステートメントを削除
-      .replace(/<[^>]*>/g, ''); // HTMLタグを削除
-    
-    data.excerpt = textContent.trim().substring(0, 120) + '...';
+      .replace(/```[\s\S]*?```/g, "") // コードブロックを削除
+      .replace(/import[\s\S]*?;/g, "") // importステートメントを削除
+      .replace(/<[^>]*>/g, ""); // HTMLタグを削除
+
+    data.excerpt = textContent.trim().substring(0, 120) + "...";
   }
 
   // 記事の閲覧数を追加
@@ -61,23 +61,22 @@ export async function getAllPosts() {
 
 export async function getPostsByTag(tag: string) {
   const posts = await getAllPosts();
-  return posts.filter(post => 
-    post.frontMatter.tags && 
-    post.frontMatter.tags.includes(tag)
+  console.log(tag, posts[0].frontMatter.tags);
+  return posts.filter(
+    (post) =>
+      post.frontMatter.tags && post.frontMatter.tags.includes(decodeURI(tag))
   );
 }
 
 export async function getPostsByCategory(category: string) {
   const posts = await getAllPosts();
-  return posts.filter(post => 
-    post.frontMatter.category === category
-  );
+  return posts.filter((post) => post.frontMatter.category === category);
 }
 
 export async function getMostViewedPosts(limit = 5) {
   const posts = await getAllPosts();
   return posts
-    .sort((a, b) => (getViewCount(b.slug) - getViewCount(a.slug)))
+    .sort((a, b) => getViewCount(b.slug) - getViewCount(a.slug))
     .slice(0, limit);
 }
 
@@ -85,7 +84,13 @@ export async function serializeMDX(content: string) {
   return serialize(content, {
     mdxOptions: {
       remarkPlugins: [remarkGfm],
-      rehypePlugins: [rehypeHighlight, [rehypeRaw, { passThrough: ['mdxJsxFlowElement', 'mdxJsxTextElement'] }]],
+      rehypePlugins: [
+        rehypeHighlight,
+        [
+          rehypeRaw,
+          { passThrough: ["mdxJsxFlowElement", "mdxJsxTextElement"] },
+        ],
+      ],
     },
     parseFrontmatter: true,
   });
@@ -107,15 +112,15 @@ export function getViewCount(slug: string) {
 export async function getAllTags() {
   const posts = await getAllPosts();
   const tagsSet = new Set<string>();
-  
-  posts.forEach(post => {
+
+  posts.forEach((post) => {
     if (post.frontMatter.tags && Array.isArray(post.frontMatter.tags)) {
       post.frontMatter.tags.forEach((tag: string) => {
         tagsSet.add(tag);
       });
     }
   });
-  
+
   return Array.from(tagsSet);
 }
 
@@ -123,31 +128,31 @@ export async function getAllTags() {
 export async function getAllCategories() {
   const posts = await getAllPosts();
   const categoriesSet = new Set<string>();
-  
-  posts.forEach(post => {
+
+  posts.forEach((post) => {
     if (post.frontMatter.category) {
       categoriesSet.add(post.frontMatter.category);
     }
   });
-  
+
   return Array.from(categoriesSet);
 }
 
 // 記事を検索
 export async function searchPosts(query: string) {
-  if (!query || query.trim() === '') {
+  if (!query || query.trim() === "") {
     return [];
   }
-  
+
   const posts = await getAllPosts();
   const lowerCaseQuery = query.toLowerCase();
-  
-  return posts.filter(post => {
-    const title = post.frontMatter.title?.toLowerCase() || '';
-    const excerpt = post.frontMatter.excerpt?.toLowerCase() || '';
+
+  return posts.filter((post) => {
+    const title = post.frontMatter.title?.toLowerCase() || "";
+    const excerpt = post.frontMatter.excerpt?.toLowerCase() || "";
     const content = post.content.toLowerCase();
     const tags = post.frontMatter.tags || [];
-    
+
     return (
       title.includes(lowerCaseQuery) ||
       excerpt.includes(lowerCaseQuery) ||

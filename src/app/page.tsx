@@ -243,17 +243,17 @@ export default async function Home() {
           <div className="grid gap-4 grid-cols-2 md:grid-cols-4">
             {[
               { name: "ガジェット", slug: "gadget", icon: "📱" },
-              { name: "レビュー", slug: "review", icon: "🔍" },
-              { name: "使い方ガイド", slug: "howto", icon: "📖" },
-              { name: "ニュース", slug: "news", icon: "📰" },
+              { name: "家具", slug: "furniture", icon: "🪑" },
+              { name: "旅行", slug: "travel", icon: "🏖️" },
+              { name: "雑談", slug: "chat", icon: "🚀" },
             ].map((category) => (
               <Link
                 key={category.slug}
-                href={`/tag/${category.slug}`}
+                href={`/category/${category.slug}`}
                 className="card p-6 text-center hover:bg-[#f9f7f5] transition-all duration-500 hover:shadow-lg transform-gpu hover:-translate-y-1 animate-scale delay-200"
               >
                 <div className="text-3xl mb-2">{category.icon}</div>
-                <h3 className="font-medium text-[#2d2926]">{category.name}</h3>
+                <p className="text-xl font-medium text-[#2d2926]">{category.name}</p>
               </Link>
             ))}
           </div>

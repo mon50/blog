@@ -11,46 +11,39 @@ export default async function CategoryPage({
   params: { slug: string };
 }) {
   const { slug } = params;
-  const posts = await getPostsByCategory(slug);
 
-  // カテゴリー情報を定義
   const categories = {
-    smartphone: {
-      title: "スマートフォン",
+    gadget: {
+      title: "ガジェット",
       description:
-        "最新のスマートフォンのレビュー、比較、使い方などの情報を紹介します。",
+        "",
       icon: "📱",
     },
-    audio: {
-      title: "オーディオ",
+    furniture: {
+      title: "家具",
       description:
-        "イヤホン、ヘッドホン、スピーカーなどのオーディオ機器に関する情報を紹介します。",
-      icon: "🎧",
+        "",
+      icon: "🪑",
     },
-    pc: {
-      title: "PC・周辺機器",
+    travel: {
+      title: "旅行",
       description:
-        "パソコン本体やキーボード、マウスなどの周辺機器に関する情報を紹介します。",
-      icon: "💻",
+        "",
+      icon: "🏖️",
     },
-    smartwatch: {
-      title: "スマートウォッチ",
+    chat: {
+      title: "雑談",
       description:
-        "スマートウォッチやフィットネストラッカーなどのウェアラブルデバイスを紹介します。",
-      icon: "⌚",
-    },
-    featured: {
-      title: "注目の記事",
-      description: "編集部が厳選したおすすめの記事を紹介します。",
-      icon: "✨",
+        "",
+      icon: "🚀",
     },
   };
 
-  // 有効なカテゴリーか確認
-  if (!categories[slug as keyof typeof categories]) {
+  if (!(slug in categories)) {
     notFound();
   }
 
+  const posts = await getPostsByCategory(categories[slug as keyof typeof categories].title);
   const category = categories[slug as keyof typeof categories];
 
   return (

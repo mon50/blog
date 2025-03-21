@@ -8,12 +8,13 @@ import { ja } from "date-fns/locale";
 export default async function TagPage({ params }: { params: { tag: string } }) {
   const { tag } = params;
   const posts = await getPostsByTag(tag);
+  console.log(posts)
 
   return (
     <Layout>
       <div className="max-w-4xl mx-auto">
         <h1 className="text-2xl md:text-3xl font-bold text-[#2d2926] mb-6 border-b pb-4 border-[#e2ddd5]">
-          タグ: {tag}
+          タグ: {decodeURI(tag)}
         </h1>
 
         {posts.length === 0 ? (
