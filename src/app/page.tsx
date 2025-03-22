@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { getAllPosts, getMostViewedPosts } from "@/lib/mdx";
 import Layout from "@/components/Layout";
 import TagLink from "@/components/TagLink";
@@ -73,9 +74,11 @@ export default async function Home() {
                   style={{ aspectRatio: "3/2" }}
                 >
                   {featuredPost.frontMatter.thumbnail ? (
-                    <img
+                    <Image
                       src={featuredPost.frontMatter.thumbnail}
                       alt={featuredPost.frontMatter.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
                       className="w-full h-full object-cover"
                     />
                   ) : (
@@ -165,9 +168,11 @@ export default async function Home() {
                       style={{ aspectRatio: "3/2" }}
                     >
                       {post.frontMatter.thumbnail ? (
-                        <img
+                        <Image
                           src={post.frontMatter.thumbnail}
                           alt={post.frontMatter.title}
+                          fill
+                          sizes="(max-width: 768px) 100vw, 33vw"
                           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                         />
                       ) : (
@@ -275,9 +280,11 @@ export default async function Home() {
                     style={{ aspectRatio: "3/2" }}
                   >
                     {post.frontMatter.thumbnail ? (
-                      <img
+                      <Image
                         src={post.frontMatter.thumbnail}
                         alt={post.frontMatter.title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 33vw"
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                       />
                     ) : (

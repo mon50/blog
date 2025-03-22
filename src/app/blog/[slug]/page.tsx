@@ -417,9 +417,11 @@ export default async function BlogPost({ params }: { params: PageParams }) {
                           style={{ aspectRatio: "3/2" }}
                         >
                           {post.frontMatter.thumbnail ? (
-                            <img
+                            <Image
                               src={post.frontMatter.thumbnail}
                               alt={post.frontMatter.title}
+                              fill
+                              sizes="(max-width: 768px) 100vw, 33vw"
                               className="w-full h-full object-cover"
                             />
                           ) : (
@@ -532,9 +534,11 @@ export default async function BlogPost({ params }: { params: PageParams }) {
                     >
                       <div className="flex-shrink-0 w-10 h-10 overflow-hidden rounded-full border-2 border-[#f1eeea]">
                         {post.frontMatter.thumbnail ? (
-                          <img
+                          <Image
                             src={post.frontMatter.thumbnail}
                             alt={post.frontMatter.title}
+                            width={40}
+                            height={40}
                             className="w-full h-full object-cover"
                           />
                         ) : (
@@ -575,9 +579,11 @@ export default async function BlogPost({ params }: { params: PageParams }) {
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center bg-[#FFDD00] text-[#2d2926] px-4 py-2 rounded-md font-medium hover:bg-opacity-90 transition-colors w-full"
                 >
-                  <img
+                  <Image
                     src="/icons/bmc-button.svg"
                     alt="Buy Me a Coffee"
+                    width={120}
+                    height={40}
                     className="h-10 w-full"
                   />
                 </a>

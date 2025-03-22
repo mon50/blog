@@ -1,6 +1,7 @@
 import { getAllPosts, getAllTags } from "@/lib/mdx";
 import Layout from "@/components/Layout";
 import Link from "next/link";
+import Image from "next/image";
 import TagLink from "@/components/TagLink";
 import { format, parseISO } from "date-fns";
 import { ja } from "date-fns/locale";
@@ -48,9 +49,11 @@ export default async function BlogPage() {
                     style={{ aspectRatio: "3/2" }}
                   >
                     {post.frontMatter.thumbnail ? (
-                      <img
+                      <Image
                         src={post.frontMatter.thumbnail}
                         alt={post.frontMatter.title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 33vw"
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                       />
                     ) : (
